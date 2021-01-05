@@ -21,8 +21,6 @@ class Navhelper extends Component{
         $url = new Services($service);
 
         $soapWsdl= $url->getUrl();
-        /* print '<pre>';
-        print_r($soapWsdl); exit;*/
 
         $filter = [];
         if(sizeof($params)){
@@ -39,6 +37,7 @@ class Navhelper extends Component{
             return [];
 
         }
+        // Yii::$app->recruitment->printrr($creds);
         //add the filter
         $results = Yii::$app->navision->readEntries($creds, $soapWsdl,$filter);
 

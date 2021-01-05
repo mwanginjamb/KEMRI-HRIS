@@ -14,7 +14,7 @@ use frontend\assets\AdminlteAsset;
 use common\widgets\Alert;
 
 AdminlteAsset::register($this);
-$this->title = 'Welcome to the COGRI SELF SERVICE Portal';
+$this->title = Yii::$app->params['welcomeText'];
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ $this->title = 'Welcome to the COGRI SELF SERVICE Portal';
     <img src="<?= \yii\helpers\Url::to('/images/Logo.jpg')?>" />
 </div>
 
-<div class="login-logo">
+<div class="login-logo text-center row-no-gutters">
     <a href="#"><b><?= $this->title ?></a>
 </div>
 <!-- /.login-logo -->

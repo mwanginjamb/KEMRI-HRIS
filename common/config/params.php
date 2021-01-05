@@ -1,6 +1,8 @@
 <?php
 return [
     'generalTitle' => 'Employee - Self Service',
+    'welcomeText' => 'Welcome to KEMRI Employee Self Service Portal',
+    'ClientCompany' => 'KEMRI WELLCOME TRUST', //branding
     'demoCompany' => 'IANSOFT LTD',
     'adminEmail' => 'customer@softeboard.com',
     'supportEmail' => 'customer@softeboard.com',
@@ -8,19 +10,19 @@ return [
     'senderName' => 'HRMIS mailer',
     'user.passwordResetTokenExpire' => 3600,
     'powered' => 'Iansoft Ltd',
-    'NavisionUsername'=>'webservice',
-    'NavisionPassword'=>'Password12345',
+    'NavisionUsername'=>'HP ELITEBOOK 840 G5',
+    'NavisionPassword'=>'@francis123#',
 
 
     'NavTestApprover' => 'Approver',
     'NavTestApproverPassword' => '@Approver123',
 
-    'server'=>'VMI455998',//'app-svr-dev.rbss.com',//Navision Server
-    'WebServicePort'=>'7047',//Nav server Port
+    'server'=>'francis',//'app-svr-dev.rbss.com',//Navision Server
+    'WebServicePort'=>'4047',//Nav server Port
     'ServerInstance'=>'BC140',//Nav Server Instance
-    'CompanyName'=>'COGRI',//Nav Company,
-    'CompanyNameStripped' => 'COGRI$', //NAV DB PREFIX
-    'ldPrefix'=>'',//ACTIVE DIRECTORY prefix
+    'CompanyName'=>'KEMRI',//Nav Company,
+    'DBCompanyName' => 'KEMRI$', //NAV DB PREFIX
+    'ldPrefix'=>'FRANCIS',//ACTIVE DIRECTORY prefix
     'adServer' => 'KRB-SVR7.KRBHQS.GO.KE', //Active directory domain controller
 
     //sharepoint config
@@ -44,7 +46,7 @@ return [
     'codeUnits' => [
         //'Portal_Workflows', //50019
         'JobApplication', //50002
-        'AppraisalWorkflow' => 'AppraisalWorkflow', //50228
+        'AppraisalWorkflow', //50228 ********
         'PortalReports', //50064
         //'ContractRenewalStatusChange', // 50024
         'PortalFactory', // 50062
@@ -124,7 +126,7 @@ return [
         'UserSetup' => 'UserSetup', //119
 
         'EmployeeCard' => 'EmployeeCard', //5200
-        'Employees' => 'Employees', //70312
+        'Employees' => 'Employees', //5201
 
         'DimensionValueList' => 'DimensionValueList', //560
         'PaymentTypes' => 'PaymentTypes', //64058
@@ -137,7 +139,7 @@ return [
         'leaveRecallList' => 'leaveRecallList',//71077
         'activeLeaveList' => 'activeLeaveList',//69005
 
-        'Approvals' => 'Approvals', //654---------------duplicated
+        
         'ApprovalComments' => 'ApprovalComments', //660
         'RejectedApprovalEntries' => 'RejectedApprovalEntries', //50003
 
@@ -202,14 +204,29 @@ return [
         'closedprobationappraisals' => 'closedprobationappraisals', //60046
         'NewEmpObjectives' => 'NewEmpObjectives', //60047
 
-        'AppraisalWorkflow' => 'AppraisalWorkflow', // 50228 ---> Code Unit
+        'AppraisalWorkflow' => 'AppraisalWorkflow', // 50228 ---> Code Unit************************
         'PerformanceLevel' => 'PerformanceLevel',//60037 page
 
         'EmployeeAppraisalKRA' => 'EmployeeAppraisalKRA',//60009
-        'TrainingPlan' => 'TrainingPlan', //60036
+        'TrainingPlan' => 'TrainingPlan', //60036***************************
         'EmployeeAppraisalCompetence' => 'EmployeeAppraisalCompetence',//60033
         'EmployeeAppraisalBehaviours' => 'EmployeeAppraisalBehaviours', //60034
         'LearningAssessmentCompetence' => 'LearningAssessmentCompetence', //60035
+
+
+
+        /*********************KEMRI CHANGE REQUEST************************************************/
+
+        'ChangeRequestList' => 'ChangeRequestList', // 55014 -Page Emp Change Request List
+        'ChangeRequestCard' => 'ChangeRequestCard', // 55015 -Page
+
+
+        /**********************KEMRI Salary Increment****************************************/
+
+        'SalaryIncrementList' => 'SalaryIncrementList', // 55025
+        'SalaryIncrementCard' => 'SalaryIncrementCard', // 55026
+
+
 
 
 

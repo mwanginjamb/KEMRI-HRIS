@@ -60,8 +60,9 @@ class EmployeeController extends Controller
     public function actionIndex(){
         $model = new Employee();
         $service = Yii::$app->params['ServiceName']['EmployeeCard'];
+        //Yii::$app->recruitment->printrr(Yii::$app->user->identity);
         $filter = [
-            'No' => Yii::$app->user->identity->{'Employee_No'},
+            'No' => Yii::$app->user->identity->{'Employee No_'},
         ];
         $employee = \Yii::$app->navhelper->getData($service,$filter);
         $model = $this->loadtomodel($employee[0],$model);

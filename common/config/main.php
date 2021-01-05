@@ -6,21 +6,36 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'name' => 'COGRI - HRMIS',
+    'name' => 'KEMRI - ESS',
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@common/mail',
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'mail.softeboard.com',
+                'username' => 'customer@softeboard.com',
+                'password' => '@Customer1220#*',
+                'port' => '587',
+            ],
+        ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'sqlsrv:server=FRANCIS\SQLEXPRESS14;database=COCGRI',
+            'dsn' => 'sqlsrv:server=FRANCIS\FRANC;database=KEMRI',
             'username' => 'Njambi',
             'password' => 'njambi123',
             'charset' => 'utf8',
         ],
         'nav' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'sqlsrv:server=FRANCIS\SQLEXPRESS14;database=COCGRI',
+            'dsn' => 'sqlsrv:server=FRANCIS\FRANC;database=KEMRI',
             'username' => 'Njambi',
             'password' => 'njambi123',
             'charset' => 'utf8',

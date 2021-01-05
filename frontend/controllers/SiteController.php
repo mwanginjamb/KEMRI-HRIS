@@ -125,10 +125,11 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->login()  ) {
 
-            //var_dump($model->login()); exit;
+             
             return $this->goBack();
 
         } else {
+          
             $model->password = '';
 
             return $this->render('login', [
@@ -323,7 +324,7 @@ class SiteController extends Controller
 
         $service = Yii::$app->params['ServiceName']['EmployeeCard'];
         $filter = [
-            'No' => Yii::$app->user->identity->{'Employee_No'},
+            'No' => Yii::$app->user->identity->{'Employee No_'},
         ];
 
         $employee = \Yii::$app->navhelper->getData($service,$filter);
@@ -348,7 +349,7 @@ class SiteController extends Controller
     public function Getleavebalance(){
         $service = Yii::$app->params['ServiceName']['LeaveBalances'];
         $filter = [
-            'No' => Yii::$app->user->identity->{'Employee_No'},
+            'No' => Yii::$app->user->identity->{'Employee No_'},
         ];
 
         $balances = \Yii::$app->navhelper->getData($service,$filter);

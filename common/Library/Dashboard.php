@@ -31,7 +31,7 @@ class Dashboard extends Component
 
         $service = Yii::$app->params['ServiceName']['RequestsTo_ApprovePortal'];
         $filter = [
-            'Sender_No' => Yii::$app->user->identity->{'Employee_No'},
+            'Sender_No' => Yii::$app->user->identity->{'Employee No_'},
             'Status' => 'Rejected'
         ];
         $result = Yii::$app->navhelper->getData($service,$filter);
@@ -49,7 +49,7 @@ class Dashboard extends Component
 
         $service = Yii::$app->params['ServiceName']['RequestsTo_ApprovePortal'];
         $filter = [
-            'Sender_No' => Yii::$app->user->identity->{'Employee_No'},
+            'Sender_No' => Yii::$app->user->identity->{'Employee No_'},
             'Status' => 'Approved'
         ];
         $result = Yii::$app->navhelper->getData($service,$filter);
@@ -67,7 +67,7 @@ class Dashboard extends Component
 
         $service = Yii::$app->params['ServiceName']['RequestsTo_ApprovePortal'];
         $filter = [
-            'Sender_No' => Yii::$app->user->identity->{'Employee_No'},
+            'Sender_No' => Yii::$app->user->identity->{'Employee No_'},
             'Status' => 'Open'
         ];
         $result = Yii::$app->navhelper->getData($service,$filter);
@@ -87,7 +87,7 @@ class Dashboard extends Component
 
         $service = Yii::$app->params['ServiceName']['RequestsTo_ApprovePortal'];
         $filter = [
-            'Approver_No' => Yii::$app->user->identity->{'Employee_No'},
+            'Approver_No' => Yii::$app->user->identity->{'Employee No_'},
             'Status' => 'Approved'
         ];
         $result = Yii::$app->navhelper->getData($service,$filter);
@@ -106,7 +106,7 @@ class Dashboard extends Component
 
         $service = Yii::$app->params['ServiceName']['RequestsTo_ApprovePortal'];
         $filter = [
-            'Approver_No' => Yii::$app->user->identity->{'Employee_No'},
+            'Approver_No' => Yii::$app->user->identity->{'Employee No_'},
             'Status' => 'Rejected'
         ];
         $result = Yii::$app->navhelper->getData($service,$filter);

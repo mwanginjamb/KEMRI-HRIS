@@ -28,6 +28,7 @@ class LoginForm extends Model
             //['rememberMe', 'boolean'],
             // password is validated by validatePassword()
            ['password', 'validatePassword'],
+           
         ];
     }
 
@@ -40,16 +41,18 @@ class LoginForm extends Model
      */
     public function validatePassword($attribute, $params)
     {
+
         // do Active directory authentication here
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            
+            //Yii::$app->recruitment->printrr($user);
 
-            if (!$user || !$user->validatePassword($this->password)) {//Add AD login condition here also--> when ad details are given
+            if (!$user || !$user->validatePassword($this->password) || !$this->logintoAD($this->username, $this->password)) {//Add AD login condition here also--> when ad details are given
 
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
+
     }
 
     /**
@@ -61,6 +64,7 @@ class LoginForm extends Model
     {
 
         if ($this->validate()) {
+
             //Lets log the password
             Yii::$app->session->set('IdentityPassword', $this->password);
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
@@ -73,7 +77,7 @@ class LoginForm extends Model
     //Ad Login
 
     function logintoAD($username,$password){
-
+        return true; // remove on deployment
         //$adServer = "ldap://ERC-SVRV7.erc.go.ke";
 
         $adServer = Yii::$app->params['adServer'];//
@@ -84,19 +88,12 @@ class LoginForm extends Model
         $bind = @ldap_bind($ldap, $ldaprdn, $password);
 
         if ($bind) {
+            return $bind; // True for a bind else false
             $filter = "(sAMAccountName=$username)";
             $result = ldap_search($ldap, "CN=KRBHQS,DC=GO, DC=KE", $filter);
 
             // ldap_sort($ldap,$result,"sn");
             $info = ldap_get_entries($ldap, $result);
-            //var_dump($info); exit;
-            //print_r($info);exit;
-//            for ($i=0; $i<$info["count"]; $i++)
-//            {
-//                if($info['count'] > 1)
-//                    break;
-//                return $info[$i];
-//            }
 
             return $info;
             @ldap_close($ldap);

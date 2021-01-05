@@ -51,21 +51,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                <?php $form->field($model, 'rememberMe')->checkbox() ?>
 
 
-                <div class="form-group">
+                <!--<div class="form-group">
 
-                     <?= '<p class="text-white">Click  here to '. Html::a('Reset Password', ['/site/request-password-reset'],['class' => '']). '.</p>' ?>
-                </div>
+                     <?/*= '<p class="text-white">Click  here to '. Html::a('Reset Password', ['/site/request-password-reset'],['class' => '']). '.</p>' */?>
+                </div>-->
 
                 <div class="form-group">
                     <?= Html::submitButton('Login', ['class' => 'btn btn-warning', 'name' => 'login-button']) ?>
 
-                    <?= '<p class="text-white">Click  here to '. Html::a('resend', ['/site/resend-verification-email'],['class' => '']). ' verification token .</p>' ?>
+                   <!-- <?/*= '<p class="text-white">Click  here to '. Html::a('resend', ['/site/resend-verification-email'],['class' => '']). ' verification token .</p>' */?>
 
-                    <?= '<p class="text-white">Don\'t have an account?  '. Html::a('signup', ['/site/signup'],['class' => '']). ' here .</p>' ?>
-                </div>
+                    <?/*= '<p class="text-white">Don\'t have an account?  '. Html::a('signup', ['/site/signup'],['class' => '']). ' here .</p>' */?>
+               --> </div>
 
     <?php ActiveForm::end(); ?>
 
@@ -75,12 +75,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $style = <<<CSS
     .login-page { 
-          background: url("../../images/11 - nyumbani_slider_donate (Medium).jpg") no-repeat center center fixed; 
+          background: url("../../images/two.jpg") no-repeat center center fixed; 
           -webkit-background-size: cover;
           -moz-background-size: cover;
           -o-background-size: cover;
           background-size: cover;
-           backdrop-filter: blur(3px);
+         
 
     }
 
@@ -104,6 +104,7 @@ $style = <<<CSS
         font-family: sans-serif, Verdana;
         font-size: larger;
         font-weight: 400;
+        text-shadow: 2px 2px 8px #21baff;
 
      }
 

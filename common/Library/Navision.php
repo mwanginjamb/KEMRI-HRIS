@@ -1029,25 +1029,19 @@ class Navision extends Component
 
             /*
 
-            UNCOMMENT THIS FOR NTLM AUTH
-             $client = new \SoapClient($soapWsdl, $options);
-            // we unregister the current HTTP wrapper
+            UNCOMMENT THIS FOR NTLM AUTH */
+             //$client = new \SoapClient($soapWsdl, $options);
             stream_wrapper_unregister('http');
             // we register the new HTTP wrapper //'\\common\\components\\NTLMStream'
             stream_wrapper_register('http', '\\common\\library\\NTLMStream') or die("Failed to register protocol");
 
-          
 
+            $client = new NTLMSoapClient($soapWsdl, $options);
 
-            $client = new NTLMSoapClient($soapWsdl, $options); // For NTLM AUTH
-              */
-            $client = new \SoapClient($soapWsdl, $options);
-            
 
             return $client;
         } catch (\Exception $e) {
-            throw new \yii\web\HttpException(503, 'Service unavailable:'.$e);
-            //return $e->getMessage();
+            throw new yii\web\HttpException('503', 'Service Erro '.$e->getMessage());
         }
         return false;
     }

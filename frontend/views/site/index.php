@@ -41,7 +41,7 @@ exit;*/
 
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <b><i class="fa fa-phone-alt"></i></b> <a class="float-right"><?= !empty($employee->Mobile_Phone_No)?$employee->Mobile_Phone_No:'' ?></a>
+                                <b><i class="fa fa-phone-alt"></i></b> <a class="float-right"><?= !empty($employee->Phone_No)?$employee->Phone_No:'(Not Set)' ?></a>
                             </li>
                             <li class="list-group-item">
                                 <b><i class="fa fa-mail-bulk"></i></b><a class="float-right"><?= !empty($employee->E_Mail)?$employee->E_Mail:'' ?></a>
