@@ -84,8 +84,8 @@ $employee = (!Yii::$app->user->isGuest && is_array(Yii::$app->user->identity->em
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
+                        <!--<i class="far fa-comments"></i>
+                        <span class="badge badge-danger navbar-badge">3</span>-->
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
@@ -314,8 +314,108 @@ $employee = (!Yii::$app->user->isGuest && is_array(Yii::$app->user->identity->em
                             </ul>
                         </li>
 
+                        <!--Change Mgt-->
+
+                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl(Yii::$app->params['profileControllers'])?'menu-open':'' ?>">
+                            <a href="#" class="nav-link <?= Yii::$app->recruitment->currentCtrl('recruitment')?'active':'' ?>">
+                                <i class="nav-icon fas fa-briefcase " ></i>
+                                <p>
+                                    Change Management
+                                    <i class="fas fa-angle-left right"></i>
+                                    <!--<span class="badge badge-info right">6</span>-->
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="<?= $absoluteUrl ?>recruitment/vacancies" class="nav-link <?= Yii::$app->recruitment->currentaction('recruitment','vacancies')?'active':'' ?>">
+                                        <i class="fa fa-check-square nav-icon"></i>
+                                        <p>Internal Job Vacancies </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="<?= $absoluteUrl ?>recruitment/externalvacancies" class="nav-link <?= Yii::$app->recruitment->currentaction('recruitment','externalvacancies')?'active':'' ?>">
+                                        <i class="fa fa-check-square nav-icon"></i>
+                                        <p>External Job Vacancies </p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
 
 
+                        <!--Salary Increment-->
+
+
+
+                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl(Yii::$app->params['profileControllers'])?'menu-open':'' ?>">
+                            <a href="#" class="nav-link <?= Yii::$app->recruitment->currentCtrl('recruitment')?'active':'' ?>">
+                                <i class="nav-icon fas fa-briefcase " ></i>
+                                <p>
+                                    Salary Increment
+                                    <i class="fas fa-angle-left right"></i>
+                                    <!--<span class="badge badge-info right">6</span>-->
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="<?= $absoluteUrl ?>recruitment/vacancies" class="nav-link <?= Yii::$app->recruitment->currentaction('recruitment','vacancies')?'active':'' ?>">
+                                        <i class="fa fa-check-square nav-icon"></i>
+                                        <p>Internal Job Vacancies </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="<?= $absoluteUrl ?>recruitment/externalvacancies" class="nav-link <?= Yii::$app->recruitment->currentaction('recruitment','externalvacancies')?'active':'' ?>">
+                                        <i class="fa fa-check-square nav-icon"></i>
+                                        <p>External Job Vacancies </p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                        <!-- Overtime -->
+
+
+                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl('overtime')?'menu-open':'' ?>">
+                            <a href="#" title="Performance Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('overtime')?'active':'' ?>">
+                                <i class="nav-icon fa fa-clock"></i>
+                                <p>
+                                    Overtime Management
+                                    <i class="fas fa-angle-left right"></i>
+                                    <!--<span class="badge badge-info right">6</span>-->
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+
+                                <li class="nav-item">
+                                    <a href="<?= $absoluteUrl ?>overtime/create" class="nav-link <?= Yii::$app->recruitment->currentaction('overtime','create')?'active':'' ?>">
+                                        <i class="fa fa-check-square nav-icon"></i>
+                                        <p> New Requisition</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="<?= $absoluteUrl ?>overtime" class="nav-link <?= Yii::$app->recruitment->currentaction('overtime','index')?'active':'' ?>">
+                                        <i class="fa fa-check-square nav-icon"></i>
+                                        <p> Overtime List</p>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+
+                        </li>
+
+                        <!--/Overtime -->
+
+
+                        <!--Recruitment-->
                         <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl(Yii::$app->params['profileControllers'])?'menu-open':'' ?>">
                             <a href="#" class="nav-link <?= Yii::$app->recruitment->currentCtrl('recruitment')?'active':'' ?>">
                                 <i class="nav-icon fas fa-briefcase " ></i>
@@ -340,31 +440,6 @@ $employee = (!Yii::$app->user->isGuest && is_array(Yii::$app->user->identity->em
                                         <p>External Job Vacancies </p>
                                     </a>
                                 </li>
-
-                               <!-- <li class="nav-item">
-                                    <a href="<?/*= $absoluteUrl */?>applicantprofile/create" class="nav-link <?/*= Yii::$app->recruitment->currentaction('applicantprofile',['create','index'])?'active':'' */?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p>Applicant Profile</p>
-                                    </a>
-                                </li>-->
-
-                                <!--<li class="nav-item">
-                                    <a href="<?/*= $absoluteUrl */?>employeerequisition" class="nav-link <?/*= Yii::$app->recruitment->currentaction('employeerequisition','index')?'active':'' */?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p>HR Requsitions List</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?/*= $absoluteUrl */?>employeerequisition/create?create=1" class="nav-link <?/*= Yii::$app->recruitment->currentaction('employeerequisition','create')?'active':'' */?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p>Create HR Requsitions</p>
-                                    </a>
-                                </li>
--->
-
-
-
 
                             </ul>
                         </li>
@@ -598,481 +673,6 @@ $employee = (!Yii::$app->user->isGuest && is_array(Yii::$app->user->identity->em
                         </li>
 
 
-
-                        <!-- Start Probation Appraisal -->
-
-
-
-                        <!---End Probationary Appraisal -->
-
-
-
-
-                        <!--Contract Management --->
-
-
-
-
-                        <!--end contract Management -->
-
-
-                        <!--Imprest management --->
-
-                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl('imprest')?'menu-open':'menu-close' ?>">
-                            <a href="#" title="Performance Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('imprest')?'active':'' ?>">
-                                <i class="nav-icon fa fa-coins"></i>
-                                <p>
-                                    Imprest Management
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!--<span class="badge badge-info right">6</span>-->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>imprest/create?requestfor=Self" class="nav-link <?= Yii::$app->recruitment->currentaction('imprest','create')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Imprest Request (Self)</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>imprest/create?requestfor=Other" class="nav-link <?= Yii::$app->recruitment->currentaction('imprest','create')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Imprest Request (Other)</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>imprest" class="nav-link <?= Yii::$app->recruitment->currentaction('imprest','index')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Imprest List</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>imprest/create-surrender?requestfor=Self" class="nav-link <?= Yii::$app->recruitment->currentaction('imprest','create-surrender')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> surrender (Self)</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>imprest/create-surrender?requestfor=Other" class="nav-link <?= Yii::$app->recruitment->currentaction('imprest','create-surrender')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Surrender (Other)</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>imprest/surrenderlist" class="nav-link <?= Yii::$app->recruitment->currentaction('imprest','surrenderlist')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Imprest Surrender List</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-                        </li>
-
-
-                        <!-- Imprest Management -->
-
-                        <!--Fund Requisitions -->
-
-
-                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl('contract')?'menu-open':'' ?>">
-                            <a href="#" title="Performance Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('fund-requisition')?'active':'' ?>">
-                                <i class="nav-icon fa fa-money-bill-wave"></i>
-                                <p>
-                                    Fund Requisition
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!--<span class="badge badge-info right">6</span>-->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>fund-requisition/create" class="nav-link <?= Yii::$app->recruitment->currentaction('fund-requisition','create')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> New Fund Requisition</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>fund-requisition" class="nav-link <?= Yii::$app->recruitment->currentaction('fund-requisition','index')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Requisition List</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-                        </li>
-
-                        <!--/Fund Requisitions -->
-
-                        <!-- Salary Advance -->
-
-
-                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl('salaryadvance')?'menu-open':'' ?>">
-                            <a href="#" title="Performance Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('salaryadvance')?'active':'' ?>">
-                                <i class="nav-icon fa fa-money-check"></i>
-                                <p>
-                                    Salary Advance
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!--<span class="badge badge-info right">6</span>-->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>salaryadvance/create" class="nav-link <?= Yii::$app->recruitment->currentaction('salaryadvance','create')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> New Requisition</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>salaryadvance" class="nav-link <?= Yii::$app->recruitment->currentaction('salaryadvance','index')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Salary Advance List</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-                        </li>
-
-                        <!--/Salary Advance -->
-
-
-                        <!-- Overtime -->
-
-
-                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl('overtime')?'menu-open':'' ?>">
-                            <a href="#" title="Performance Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('overtime')?'active':'' ?>">
-                                <i class="nav-icon fa fa-clock"></i>
-                                <p>
-                                    Overtime Management
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!--<span class="badge badge-info right">6</span>-->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>overtime/create" class="nav-link <?= Yii::$app->recruitment->currentaction('overtime','create')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> New Requisition</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>overtime" class="nav-link <?= Yii::$app->recruitment->currentaction('overtime','index')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Overtime List</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-                        </li>
-
-                        <!--/Overtime -->
-
-
-                        <!-- Medical Cover -->
-
-
-                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl('medicalcover')?'menu-open':'' ?>">
-                            <a href="#" title="Performance Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('medicalcover')?'active':'' ?>">
-                                <i class="nav-icon fa fa-clinic-medical"></i>
-                                <p>
-                                    Medical Cover Claim
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!--<span class="badge badge-info right">6</span>-->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>medicalcover/create" class="nav-link <?= Yii::$app->recruitment->currentaction('medicalcover','create')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> New Claim</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>medicalcover/index" class="nav-link <?= Yii::$app->recruitment->currentaction('medicalcover','index')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Claims List</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-                        </li>
-
-                        <!--/Medical Cover -->
-
-
-
-
-                        <!-- Drug Requisitions -->
-
-
-                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl('drug-issuance')?'menu-open':'' ?>">
-                            <a href="#" title="Performance Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('drug-issuance')?'active':'' ?>">
-                                <i class="nav-icon fa fa-medkit"></i>
-                                <p>
-                                    Drug Issuance
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!--<span class="badge badge-info right">6</span>-->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>drug-issuance/create" class="nav-link <?= Yii::$app->recruitment->currentaction('drug-issuance','create')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> New Drug Requisition</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>drug-issuance/index" class="nav-link <?= Yii::$app->recruitment->currentaction('drug-issuance','index')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Prescriptions List</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>drug-issuance/issued" class="nav-link <?= Yii::$app->recruitment->currentaction('drug-issuance','issued')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p> Issued Prescriptions List</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-                        </li>
-
-                        <!--/Drug Requisitions -->
-
-
-                        <!--Fleet Mgt-->
-
-                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl(['vehiclerequisition','fuel','work-ticket','repair-requisition'])?'menu-open':'' ?>">
-                            <a href="#" title="Performance Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('medicalcover')?'active':'' ?>">
-                                <i class="nav-icon fa fa-truck-moving"></i>
-                                <p>
-                                    Fleet Management
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!--<span class="badge badge-info right">6</span>-->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>vehiclerequisition/vehicle-availability" class="nav-link <?= Yii::$app->recruitment->currentaction('vehiclerequisition','vehicle-availability')?'active':'' ?>">
-                                        <i class="fa fa-key nav-icon"></i>
-                                        <p> Vehicle Availability List</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>vehiclerequisition/create" class="nav-link <?= Yii::$app->recruitment->currentaction('vehiclerequisition','create')?'active':'' ?>">
-                                        <i class="fa fa-key nav-icon"></i>
-                                        <p> New Booking Req.</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>vehiclerequisition" class="nav-link <?= Yii::$app->recruitment->currentaction('vehiclerequisition','index')?'active':'' ?>">
-                                        <i class="fa fa-truck-pickup nav-icon"></i>
-                                        <p> Booking Req. List</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>vehiclerequisition/approved-requisitions" class="nav-link <?= Yii::$app->recruitment->currentaction('vehiclerequisition','approved-requisitions')?'active':'' ?>">
-                                        <i class="fa fa-check nav-icon"></i>
-                                        <p> Approved Req. List</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>fuel/create" class="nav-link <?= Yii::$app->recruitment->currentaction('fuel','create')?'active':'' ?>">
-                                        <i class="fa fa-fire nav-icon"></i>
-                                        <p> New Fuel Req.</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>fuel" class="nav-link <?= Yii::$app->recruitment->currentaction('fuel','index')?'active':'' ?>">
-                                        <i class=" fa fa-dumpster-fire nav-icon"></i>
-                                        <p> Fuel Req. List</p>
-                                    </a>
-                                </li>
-
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>work-ticket/create" class="nav-link <?= Yii::$app->recruitment->currentaction('work-ticket','create')?'active':'' ?>">
-                                        <i class="fa fa-ticket-alt nav-icon"></i>
-                                        <p> New Work Ticket</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>work-ticket" class="nav-link <?= Yii::$app->recruitment->currentaction('work-ticket','index')?'active':'' ?>">
-                                        <i class=" fa fa-ticket-alt nav-icon"></i>
-                                        <p> Work Ticket List</p>
-                                    </a>
-                                </li>
-
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>repair-requisition/create" class="nav-link <?= Yii::$app->recruitment->currentaction('repair-requisition','create')?'active':'' ?>">
-                                        <i class="fa fa-wrench nav-icon"></i>
-                                        <p> New Repair Requisition</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>repair-requisition" class="nav-link <?= Yii::$app->recruitment->currentaction('repair-requisition','index')?'active':'' ?>">
-                                        <i class=" fa fa-wrench nav-icon"></i>
-                                        <p> Repair Req. List</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>repair-requisition/monitoring" class="nav-link <?= Yii::$app->recruitment->currentaction('repair-requisition','monitoring')?'active':'' ?>">
-                                        <i class=" fa fa-wrench nav-icon"></i>
-                                        <p> Repair Status Monitoring</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-                        </li>
-
-
-                        <!--/Fleet Mgt-->
-
-                        <!--Procurement-->
-
-                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl(['storerequisition','purchase-requisition'])?'menu-open':'' ?>">
-                            <a href="#" title="Performance Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('storerequisition')?'active':'' ?>">
-                                <i class="nav-icon fa fa-truck-loading"></i>
-                                <p>
-                                    Procurement
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!--<span class="badge badge-info right">6</span>-->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>storerequisition/create" class="nav-link <?= Yii::$app->recruitment->currentaction('storerequisition','create')?'active':'' ?>">
-                                        <i class="fa fa-truck-loading nav-icon"></i>
-                                        <p> New Store Req.</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>storerequisition" class="nav-link <?= Yii::$app->recruitment->currentaction('storerequisition','index')?'active':'' ?>">
-                                        <i class="fa fa-truck-loading nav-icon"></i>
-                                        <p> Store Req. List</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-
-
-                            <!--Purchase Requisition -->
-
-
-                            <ul class="nav nav-treeview">
-
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>purchase-requisition/create" class="nav-link <?= Yii::$app->recruitment->currentaction('purchase-requisition','create')?'active':'' ?>">
-                                        <i class="fa fa-truck-loading nav-icon"></i>
-                                        <p> New Purchase Req.</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>purchase-requisition" class="nav-link <?= Yii::$app->recruitment->currentaction('purchase-requisition','index')?'active':'' ?>">
-                                        <i class="fa fa-truck-loading nav-icon"></i>
-                                        <p> Purchase Req. List</p>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-
-
-                        </li>
-
-
-                        <!--/Procurement-->
-
-
-                        <!--Contract Management --->
-
-                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl('contractrenewal')?'menu-open':'' ?>">
-                            <a href="#" title="Contract Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('contractrenewal')?'active':'' ?>">
-                                <i class="nav-icon fa fa-paperclip"></i>
-                                <p>
-                                    Contract Renewal
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!--<span class="badge badge-info right">6</span>-->
-                                </p>
-                            </a>
-                        <ul class="nav nav-treeview">
-
-                            <li class="nav-item">
-                                <a href="<?= $absoluteUrl ?>contractrenewal/create" class="nav-link <?= Yii::$app->recruitment->currentaction('contractrenewal','create')?'active':'' ?>">
-                                    <i class="fa fa-check-square nav-icon"></i>
-                                    <p> Renew Conctract</p>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="<?= $absoluteUrl ?>contractrenewal" class="nav-link <?= Yii::$app->recruitment->currentaction('contractrenewal','index')?'active':'' ?>">
-                                    <i class="fa fa-check-square nav-icon"></i>
-                                    <p> Contracts Renewal List</p>
-                                </a>
-                            </li>
-
-
-                        </ul>
-
-                        </li>
-
-                        <!--end contract Management -->
-
-
-
                         <!-- Start Probation Appraisal -->
 
                         <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl('probation')?'menu-open':'' ?>">
@@ -1123,6 +723,44 @@ $employee = (!Yii::$app->user->isGuest && is_array(Yii::$app->user->identity->em
                         </li>
 
                         <!---End Probationary Appraisal -->
+
+                        <!--Contract Management --->
+
+                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl('contractrenewal')?'menu-open':'' ?>">
+                            <a href="#" title="Contract Management" class="nav-link <?= Yii::$app->recruitment->currentCtrl('contractrenewal')?'active':'' ?>">
+                                <i class="nav-icon fa fa-paperclip"></i>
+                                <p>
+                                    Contract Renewal
+                                    <i class="fas fa-angle-left right"></i>
+                                    <!--<span class="badge badge-info right">6</span>-->
+                                </p>
+                            </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="<?= $absoluteUrl ?>contractrenewal/create" class="nav-link <?= Yii::$app->recruitment->currentaction('contractrenewal','create')?'active':'' ?>">
+                                    <i class="fa fa-check-square nav-icon"></i>
+                                    <p> Renew Conctract</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="<?= $absoluteUrl ?>contractrenewal" class="nav-link <?= Yii::$app->recruitment->currentaction('contractrenewal','index')?'active':'' ?>">
+                                    <i class="fa fa-check-square nav-icon"></i>
+                                    <p> Contracts Renewal List</p>
+                                </a>
+                            </li>
+
+
+                        </ul>
+
+                        </li>
+
+                        <!--end contract Management -->
+
+
+
+
 
 
 
