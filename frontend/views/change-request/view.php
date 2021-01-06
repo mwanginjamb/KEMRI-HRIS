@@ -9,9 +9,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Leave Plan - '.$model->Plan_No;
+$this->title = 'Vehicle Requisition - '.$model->Booking_Requisition_No;
 $this->params['breadcrumbs'][] = ['label' => 'Leave Plans', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => 'Leave Plan Card', 'url' => ['view','Plan_No'=> $model->Plan_No]];
+$this->params['breadcrumbs'][] = ['label' => 'Leave Plan Card', 'url' => ['view','No'=> $model->Booking_Requisition_No]];
 /** Status Sessions */
 
 
@@ -23,12 +23,12 @@ Yii::$app->session->set('isSupervisor',false);*/
 <div class="row">
     <div class="col-md-4">
 
-        <?= ($model->Status == 'Open')?Html::a('<i class="fas fa-paper-plane"></i> Send Approval Req',['send-for-approval'],['class' => 'btn btn-app submitforapproval',
+        <?= ($model->Booking_Requisition_Status == 'New')?Html::a('<i class="fas fa-paper-plane"></i> Send Approval Req',['send-for-approval'],['class' => 'btn btn-app submitforapproval',
             'data' => [
                 'confirm' => 'Are you sure you want to send this document for approval?',
                 'params'=>[
-                    'Plan_No'=> $model->Plan_No,
-                    'employeeNo' => Yii::$app->user->identity->{'Employee No_'},
+                    'No'=> $model->Booking_Requisition_No,
+                    'employeeNo' => Yii::$app->user->identity->{'Employee_No'},
                 ],
                 'method' => 'get',
         ],
@@ -37,11 +37,11 @@ Yii::$app->session->set('isSupervisor',false);*/
         ]):'' ?>
 
 
-        <?= ($model->Status == 'Pending_Approval')?Html::a('<i class="fas fa-times"></i> Cancel Approval Req.',['cancel-request'],['class' => 'btn btn-app submitforapproval',
+        <?= ($model->Booking_Requisition_Status == 'Pending_Approval')?Html::a('<i class="fas fa-times"></i> Cancel Approval Req.',['cancel-request'],['class' => 'btn btn-app submitforapproval',
             'data' => [
             'confirm' => 'Are you sure you want to cancel imprest approval request?',
             'params'=>[
-                'No'=> $model->Plan_No,
+                'No'=> $model->Booking_Requisition_No,
             ],
             'method' => 'get',
         ],
@@ -55,7 +55,7 @@ Yii::$app->session->set('isSupervisor',false);*/
         <div class="col-md-12">
             <div class="card-info">
                 <div class="card-header">
-                    <h3>Leave Plan Card </h3>
+                    <h3>Vehicle Booking Requisition Document </h3>
                 </div>
 
 
@@ -72,7 +72,7 @@ Yii::$app->session->set('isSupervisor',false);*/
 
 
 
-                    <h3 class="card-title">Leave Plan No : <?= $model->Plan_No?></h3>
+                    <h3 class="card-title">Requisition No : <?= $model->Booking_Requisition_No?></h3>
 
 
 
@@ -99,23 +99,19 @@ Yii::$app->session->set('isSupervisor',false);*/
                     <div class="row">
                         <div class=" row col-md-12">
                             <div class="col-md-6">
-                                <?= $form->field($model, 'Plan_No')->textInput(['readonly'=> true]) ?>
+                                <?= $form->field($model, 'Booking_Requisition_No')->textInput(['readonly'=> true]) ?>
                                 <?= $form->field($model, 'Key')->hiddenInput()->label(false) ?>
-                                <?= $form->field($model, 'Employee_No')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                <?= $form->field($model, 'Employee_Name')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                <?= $form->field($model, 'Global_Dimension_1_Code')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                <?= $form->field($model, 'Global_Dimension_2_Code')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-
-
-
+                                <?= $form->field($model, 'Requisition_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Reason_For_Booking')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Requested_By')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
 
                             </div>
                             <div class="col-md-6">
-                                <?= $form->field($model, 'Leave_Calender_Code')->textInput(['readonly'=> true,'disabled'=> true]) ?>
-                                <?= $form->field($model, 'Leave_Calendar_Description')->textInput(['readonly'=> true,'disabled'=> true]) ?>
-                                <?= $form->field($model, 'Leave_Calendar_Start_Date')->textInput(['readonly'=> true,'disabled'=> true]) ?>
-                                <?= $form->field($model, 'Leave_Calendar_End_Date')->textInput(['readonly'=> true,'disabled'=> true]) ?>
-                                <?= $form->field($model, 'Status')->textInput(['readonly'=> true,'disabled'=> true]) ?>
+                                <?= $form->field($model, 'Department')->textInput(['readonly'=> true,'disabled'=> true]) ?>
+                                <?= $form->field($model, 'Booking_Requisition_Status')->textInput(['readonly'=> true,'disabled'=> true]) ?>
+                                <?= $form->field($model, 'Booked_Status')->textInput(['readonly'=> true,'disabled'=> true]) ?>
+
+
 
                             </div>
                         </div>
@@ -136,7 +132,7 @@ Yii::$app->session->set('isSupervisor',false);*/
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <?=($model->Status == 'Open')?Html::a('<i class="fa fa-plus-square"></i> New Leave Plan Line',['leaveplanline/create','Plan_No'=>$model->Plan_No],['class' => 'add-line btn btn-outline-info',
+                        <?=($model->Booking_Requisition_Status == 'New')?Html::a('<i class="fa fa-plus-square"></i> Add Line',['vehiclerequisitionline/create','No'=>$model->Booking_Requisition_No],['class' => 'add-line btn btn-outline-info',
                         ]):'' ?>
                     </div>
                 </div>
@@ -151,17 +147,15 @@ Yii::$app->session->set('isSupervisor',false);*/
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <td><b>Plan No</b></td>
-                                <td><b>Employee Code</b></td>
-                                <td><b>Leave Code</b></td>
-                                <td><b>Leave Type Description</b></td>
-                                <td><b>Leave Balance</b></td>
-                                <td><b>Start Date</b></td>
+                                <td><b>Requisition No.</b></td>
+                                <td><b>Vehicle Registration Vehicle</b></td>
+                                <td><b>Vehicle Model</b></td>
+                                <td><b>Booking Date</b></td>
                                 <td><b>End Date</b></td>
-                                <td><b>Days Planned</b></td>
-                                <td><b>Holidays</b></td>
-                                <td><b>Weekend_Days</b></td>
-                                <td><b>Total No Of Days</b></td>
+                                <td><b>Booking Duration</b></td>
+                                <td><b>Booked Status</b></td>
+                                <td><b>Booking Requisition Status</b></td>
+
                                 <td><b>Action</b></td>
 
                             </tr>
@@ -171,22 +165,19 @@ Yii::$app->session->set('isSupervisor',false);*/
                             // print '<pre>'; print_r($model->getObjectives()); exit;
 
                             foreach($model->lines as $obj):
-                                $updateLink = Html::a('<i class="fa fa-edit"></i>',['leaveplanline/update','Line_No'=> $obj->Line_No],['class' => 'update-objective btn btn-outline-info btn-xs']);
-                                $deleteLink = Html::a('<i class="fa fa-trash"></i>',['leaveplanline/delete','Key'=> $obj->Key ],['class'=>'delete btn btn-outline-danger btn-xs']);
+                                $updateLink = Html::a('<i class="fa fa-edit"></i>',['vehiclerequisitionline/update','No'=> $obj->Booking_Requisition_No],['class' => 'update-objective btn btn-outline-info btn-xs']);
+                                $deleteLink = Html::a('<i class="fa fa-trash"></i>',['vehiclerequisitionline/delete','Key'=> $obj->Key ],['class'=>'delete btn btn-outline-danger btn-xs']);
                                 ?>
                                 <tr>
 
-                                    <td><?= !empty($obj->Plan_No)?$obj->Plan_No:'Not Set' ?></td>
-                                    <td><?= !empty($obj->Employee_Code)?$obj->Employee_Code:'Not Set' ?></td>
-                                    <td><?= !empty($obj->Leave_Code)?$obj->Leave_Code:'Not Set' ?></td>
-                                    <td><?= !empty($obj->Leave_Type_Description)?$obj->Leave_Type_Description:'Not Set' ?></td>
-                                    <td><?= !empty($obj->Leave_Balance)?$obj->Leave_Balance:'Not Set' ?></td>
-                                    <td><?= !empty($obj->Start_Date)?$obj->Start_Date:'Not Set' ?></td>
+                                    <td><?= !empty($obj->Booking_Requisition_No)?$obj->Booking_Requisition_No:'Not Set' ?></td>
+                                    <td><?= !empty($obj->Vehicle_Regitration_No)?$obj->Vehicle_Regitration_No:'Not Set' ?></td>
+                                    <td><?= !empty($obj->Vehicle_Model)?$obj->Vehicle_Model:'Not Set' ?></td>
+                                    <td><?= !empty($obj->Booking_Date)?$obj->Booking_Date:'Not Set' ?></td>
                                     <td><?= !empty($obj->End_Date)?$obj->End_Date:'Not Set' ?></td>
-                                    <td><?= !empty($obj->Days_Planned)?$obj->Days_Planned:'Not Set' ?></td>
-                                    <td><?= !empty($obj->Holidays)?$obj->Holidays:'Not Set' ?></td>
-                                    <td><?= !empty($obj->Weekend_Days)?$obj->Weekend_Days:'Not Set' ?></td>
-                                    <td><?= !empty($obj->Total_No_Of_Days)?$obj->Total_No_Of_Days:'Not Set' ?></td>
+                                    <td><?= !empty($obj->Booking_Duration_Days)?$obj->Booking_Duration_Days:'Not Set' ?></td>
+                                    <td><?= !empty($obj->Booking_Requisition_Status)?$obj->Booking_Requisition_Status:'Not Set' ?></td>
+                                    <td><?= !empty($obj->End_Date)?$obj->End_Date:'Not Set' ?></td>
 
                                     <td><?= $updateLink.'|'.$deleteLink ?></td>
                                 </tr>
@@ -210,7 +201,7 @@ Yii::$app->session->set('isSupervisor',false);*/
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel" style="position: absolute">Leave Plan</h4>
+                    <h4 class="modal-title" id="myModalLabel" style="position: absolute">Fleet Management</h4>
                 </div>
                 <div class="modal-body">
 

@@ -74,7 +74,7 @@ class LeavestatementController extends Controller
         //Yii::$app->recruitment->printrr(ArrayHelper::map($payrollperiods,'Date_Opened','desc'));
 
             $data = [
-                'empNo' => Yii::$app->user->identity->{'Employee_No'}
+                'empNo' => Yii::$app->user->identity->{'Employee No_'}
              ];
             $path = Yii::$app->navhelper->PortalReports($service,$data,'IanGenerateLeaveStatement');
             //Yii::$app->recruitment->printrr($path);

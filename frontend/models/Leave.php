@@ -47,6 +47,7 @@ public $E_Mail_Address;
 public $Grade;
 public $Status;
 public $Approval_Entries;
+public $Leave_Allowance;
 public $isNewRecord;
 
     /*public function __construct(array $config = [])

@@ -87,7 +87,7 @@ class LeaveController extends Controller
 
             $now = date('Y-m-d');
             $model->Start_Date = date('Y-m-d', strtotime($now.' + 2 days'));
-            $model->Employee_No = Yii::$app->user->identity->Employee_No;
+            $model->Employee_No = Yii::$app->user->identity->{'Employee No_'};
             $request = Yii::$app->navhelper->postData($service,$model);
             //Yii::$app->recruitment->printrr($request);
             if(is_object($request) )
