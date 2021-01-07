@@ -22,6 +22,7 @@ public $Nature_of_Change;
 public $Employee_No;
 public $Employee_Name;
 public $Approval_Entries;
+public $Status;
 public $isNewRecord;
 
 
@@ -40,17 +41,114 @@ public $isNewRecord;
         ];
     }
 
-    public function getLines(){
-        $service = Yii::$app->params['ServiceName']['BookingRequisitionLine'];
+    /*Get Dependant*/
+    public function getDependants(){
+        $service = Yii::$app->params['ServiceName']['EmployeeDepandants'];
         $filter = [
-            'Booking_Requisition_No' => $this->Booking_Requisition_No,
+            'Change_No' => $this->No,
         ];
 
         $lines = Yii::$app->navhelper->getData($service, $filter);
-       return $lines;
+        return $lines;
 
     }
 
+    /*Get Relatives*/
+
+    public function getRelatives(){
+        $service = Yii::$app->params['ServiceName']['EmployeeRelativesChange'];
+        $filter = [
+            //'Change_No' => $this->No,
+        ];
+
+        $lines = Yii::$app->navhelper->getData($service, $filter);
+        return $lines;
+
+    }
+
+    /*Get Beneficiaries*/
+
+    public function getBeneficiaries(){
+        $service = Yii::$app->params['ServiceName']['EmployeeBeneficiariesChange'];
+        $filter = [
+            //'Change_No' => $this->No,
+        ];
+
+        $lines = Yii::$app->navhelper->getData($service, $filter);
+        return $lines;
+
+    }
+
+    /*Get work History*/
+
+    public function getWorkHistory(){
+        $service = Yii::$app->params['ServiceName']['EmployeeWorkHistoryChange'];
+        $filter = [
+            'Change_No' => $this->No,
+        ];
+
+        $lines = Yii::$app->navhelper->getData($service, $filter);
+        return $lines;
+
+    }
+
+    /*Get Proffessional Bodies*/
+    public function getProfessional(){
+        $service = Yii::$app->params['ServiceName']['EmployeeProffesionalBodies'];
+        $filter = [
+            'Change_No' => $this->No,
+        ];
+
+        $lines = Yii::$app->navhelper->getData($service, $filter);
+        return $lines;
+
+    }
+
+    /*Get Qualifications*/
+
+    public function getQualifications(){
+        $service = Yii::$app->params['ServiceName']['EmployeeQualificationsChange'];
+        $filter = [
+            'Change_No' => $this->No,
+        ];
+
+        $lines = Yii::$app->navhelper->getData($service, $filter);
+        return $lines;
+
+    }
+
+
+    /*Get Emergency Contacts*/
+
+    public function getEmergency(){
+        $service = Yii::$app->params['ServiceName']['EmployeeEmergencyContacts'];
+        $filter = [
+            'Change_No' => $this->No,
+        ];
+
+        $lines = Yii::$app->navhelper->getData($service, $filter);
+        return $lines;
+
+    }
+
+    /*Miscellaneous shit*/
+
+    public function getMisc(){
+        $service = Yii::$app->params['ServiceName']['Miscinformation'];
+        $filter = [
+            'Change_No' => $this->No,
+        ];
+
+        $lines = Yii::$app->navhelper->getData($service, $filter);
+        return $lines;
+
+    }
+
+
+
+
+
+/*Drop downs*/
     public function getChanges()
     {
 

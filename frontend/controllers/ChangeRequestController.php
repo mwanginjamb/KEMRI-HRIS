@@ -9,6 +9,7 @@
 namespace frontend\controllers;
 use frontend\models\Careerdevelopmentstrength;
 use frontend\models\Changerequest;
+use frontend\models\Dependant;
 use frontend\models\Employeeappraisalkra;
 use frontend\models\Experience;
 use frontend\models\Imprestcard;
@@ -17,7 +18,7 @@ use frontend\models\Imprestsurrendercard;
 use frontend\models\Leaveplan;
 use frontend\models\Leaveplancard;
 use frontend\models\Salaryadvance;
-use frontend\models\Trainingplan;
+
 use frontend\models\Vehiclerequisition;
 use Yii;
 use yii\filters\AccessControl;
@@ -215,12 +216,94 @@ class ChangeRequestController extends Controller
         }
     }
 
+    public function actionGender()
+    {
+
+        $changes = [
+            ['Code' => '_blank_','Desc' => '_blank_'],
+            ['Code' => 'Male' ,'Desc' =>'Male'],
+            ['Code' => 'Female' ,'Desc' => 'Female'],
+            ['Code' =>'Unknown' ,'Desc' => 'Unknown'],
+        ];
+
+        $data =  ArrayHelper::map($changes,'Code','Desc');
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
+
+    public function actionAction()
+    {
+
+        $changes = [
+            ['Code' => 'Retain','Desc' => 'Retain'],
+            ['Code' => 'Remove' ,'Desc' =>'Remove'],
+            ['Code' => 'New_Addition' ,'Desc' =>'New_Addition'],
+            ['Code' => 'Existing' ,'Desc' =>'Existing'],
+            ['Code' => 'Modify_Allocation' ,'Desc' =>'Modify_Allocation'],
+
+        ];
+
+        $data =  ArrayHelper::map($changes,'Code','Desc');
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
+    public function actionRelatives()
+    {
+        $service = Yii::$app->params['ServiceName']['Relatives'];
+        $relatives = Yii::$app->navhelper->getData($service, []);
+
+        $data = Yii::$app->navhelper->refactorArray($relatives,'Code','Description');
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
+    public function actionProfessional()
+    {
+        $service = Yii::$app->params['ServiceName']['Professional'];
+        $relatives = Yii::$app->navhelper->getData($service, []);
+
+        $data = Yii::$app->navhelper->refactorArray($relatives,'Code','Name');
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
+    public function actionQualifications()
+    {
+        $service = Yii::$app->params['ServiceName']['Qualifications'];
+        $relatives = Yii::$app->navhelper->getData($service, []);
+
+        $data = Yii::$app->navhelper->refactorArray($relatives,'Code', 'Description');
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
+    public function actionType()
+    {
+
+        $changes = [
+            ['Code' => 'Adult','Desc' => 'Adult'],
+            ['Code' => 'Minor' ,'Desc' =>'Minor'],
+
+        ];
+
+        $data =  ArrayHelper::map($changes,'Code','Desc');
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
+
+
     public function actionView($No){
         $model = new Changerequest();
         $service = Yii::$app->params['ServiceName']['ChangeRequestCard'];
 
         $filter = [
-            'Booking_Requisition_No' => $No
+            'No' => $No
         ];
 
         $result = Yii::$app->navhelper->getData($service, $filter);
@@ -238,7 +321,7 @@ class ChangeRequestController extends Controller
    // Get Vehicle Requisition list
 
     public function actionList(){
-        $service = Yii::$app->params['ServiceName']['BookingRequisitionList'];
+        $service = Yii::$app->params['ServiceName']['ChangeRequestList'];
         $filter = [
             'Employee_No' => Yii::$app->user->identity->Employee[0]->No,
         ];
@@ -247,25 +330,22 @@ class ChangeRequestController extends Controller
         $result = [];
         foreach($results as $item){
 
-            if(!empty($item->Booking_Requisition_No ))
+            if(!empty($item->No ))
             {
                 $link = $updateLink = $deleteLink =  '';
-                $Viewlink = Html::a('<i class="fas fa-eye"></i>',['view','No'=> $item->Booking_Requisition_No ],['class'=>'btn btn-outline-primary btn-xs','title' => 'View Request.' ]);
-                if($item->Booking_Requisition_Status == 'New'){
-                    $link = Html::a('<i class="fas fa-paper-plane"></i>',['send-for-approval','No'=> $item->Booking_Requisition_No ],['title'=>'Send Approval Request','class'=>'btn btn-primary btn-xs']);
-                    $updateLink = Html::a('<i class="far fa-edit"></i>',['update','No'=> $item->Booking_Requisition_No ],['class'=>'btn btn-info btn-xs','title' => 'Update Request']);
-                }else if($item->Booking_Requisition_Status == 'Pending_Approval'){
-                    $link = Html::a('<i class="fas fa-times"></i>',['cancel-request','No'=> $item->Booking_Requisition_No ],['title'=>'Cancel Approval Request','class'=>'btn btn-warning btn-xs']);
+                $Viewlink = Html::a('<i class="fas fa-eye"></i>',['view','No'=> $item->No ],['class'=>'btn btn-outline-primary btn-xs','title' => 'View Request.' ]);
+                if($item->Status == 'New'){
+                    $link = Html::a('<i class="fas fa-paper-plane"></i>',['send-for-approval','No'=> $item->No ],['title'=>'Send Approval Request','class'=>'btn btn-primary btn-xs']);
+                    $updateLink = Html::a('<i class="far fa-edit"></i>',['update','No'=> $item->No ],['class'=>'btn btn-info btn-xs','title' => 'Update Request']);
                 }
 
                 $result['data'][] = [
                     'Key' => $item->Key,
-                    'No' => $item->Booking_Requisition_No,
+                    'No' => $item->No,
+                    'Nature_of_Change' => !empty($item->Nature_of_Change)?$item->Nature_of_Change:'',
                     'Employee_No' => !empty($item->Employee_No)?$item->Employee_No:'',
-                    'Requisition_Date' => !empty($item->Requisition_Date)?$item->Requisition_Date:'',
-                    'Reason_For_Booking' => !empty($item->Reason_For_Booking)?$item->Reason_For_Booking:'',
-                    'Department' => !empty($item->Department)?$item->Department:'',
-                    'Booking_Requisition_Status' => $item->Booking_Requisition_Status,
+                    'Employee_Name' => !empty($item->Employee_Name)?$item->Employee_Name:'',
+                    'Status' => !empty($item->Status)?$item->Status:'',
                     'Action' => $link.' '. $updateLink.' '.$Viewlink ,
 
                 ];
@@ -308,23 +388,47 @@ class ChangeRequestController extends Controller
 
     }
 
-    public function actionSetamount(){
-        $model = new Salaryadvance();
-        $service = Yii::$app->params['ServiceName']['SalaryAdvanceCard'];
+    public function actionCommit(){
+        $commitModel = trim(Yii::$app->request->post('model'));
+        $commitService = Yii::$app->request->post('service');
+        $key = Yii::$app->request->post('key');
+        $name = Yii::$app->request->post('name');
+        $value = Yii::$app->request->post('value');
+        $filterKey = Yii::$app->request->post('filterKey');
 
-        $filter = [
-            'Plan_No' => Yii::$app->request->post('Plan_No')
-        ];
+
+
+        $service = Yii::$app->params['ServiceName'][$commitService];
+
+        if(!empty($filterKey))
+        {
+            $filter = [
+                $filterKey => Yii::$app->request->post('no')
+            ];
+        }
+        else{
+            $filter = [
+                'Line_No' => Yii::$app->request->post('no')
+            ];
+        }
+
         $request = Yii::$app->navhelper->getData($service, $filter);
 
+
+        $data = [];
         if(is_array($request)){
-            Yii::$app->navhelper->loadmodel($request[0],$model);
-            $model->Key = $request[0]->Key;
-            $model->Amount_Requested = Yii::$app->request->post('amount');
+            $data = [
+                'Key' => $request[0]->Key,
+                $name => $value
+            ];
+        }else{
+            Yii::$app->response->format = \yii\web\response::FORMAT_JSON;
+            return ['error' => $request];
         }
 
 
-        $result = Yii::$app->navhelper->updateData($service,$model);
+
+        $result = Yii::$app->navhelper->updateData($service,$data);
 
         Yii::$app->response->format = \yii\web\response::FORMAT_JSON;
 

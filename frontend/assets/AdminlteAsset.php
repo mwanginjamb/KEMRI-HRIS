@@ -73,6 +73,8 @@ class AdminlteAsset extends AssetBundle
         'https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js',
         'https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js ',
 
+        'Js/custom.js',
+
     ];
     public $depends = [
         'yii\web\YiiAsset',

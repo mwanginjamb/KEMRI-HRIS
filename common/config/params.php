@@ -219,6 +219,17 @@ return [
 
         'ChangeRequestList' => 'ChangeRequestList', // 55014 -Page Emp Change Request List
         'ChangeRequestCard' => 'ChangeRequestCard', // 55015 -Page
+        'EmployeeDepandants' => 'EmployeeDepandants', //50077
+        'EmployeeRelativesChange' => 'EmployeeRelativesChange', // 50072
+        'EmployeeBeneficiariesChange' => 'EmployeeBeneficiariesChange', //50073 ---No. instead of Line_No
+        'EmployeeWorkHistoryChange' => 'EmployeeWorkHistoryChange', //50074
+        'EmployeeProffesionalBodies' => 'EmployeeProffesionalBodies', // 50075
+        'EmployeeQualificationsChange' => 'EmployeeQualificationsChange', //50079
+        'EmployeeEmergencyContacts' => 'EmployeeEmergencyContacts', //50078
+        'Miscinformation' => 'Miscinformation', //50080
+        'Relatives' => 'Relatives', //5208
+        'Professional' => 'Professional', //50071
+        'Qualifications' => 'Qualifications', //5205
 
 
         /**********************KEMRI Salary Increment****************************************/

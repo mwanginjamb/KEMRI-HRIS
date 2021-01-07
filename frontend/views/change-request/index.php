@@ -11,7 +11,7 @@
 /* @var $this yii\web\View */
 
 $this->title = Yii::$app->params['generalTitle'];
-$this->params['breadcrumbs'][] = ['label' => 'Vehicle Requisition List', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Change Request List', 'url' => ['index']];
 $this->params['breadcrumbs'][] = '';
 $url = \yii\helpers\Url::home(true);
 ?>
@@ -19,7 +19,7 @@ $url = \yii\helpers\Url::home(true);
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-        <?= \yii\helpers\Html::a('New Vehicle Requisition',['create'],['class' => 'btn btn-info push-right', 'data' => [
+        <?= \yii\helpers\Html::a('New Change Request',['create'],['class' => 'btn btn-info push-right', 'data' => [
             'confirm' => 'Are you sure you want to create a new Request?',
             'method' => 'get',
         ],]) ?>
@@ -50,7 +50,7 @@ if(Yii::$app->session->hasFlash('success')){
     <div class="col-md-12">
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">Vehicle Requisition List</h3>
+                <h3 class="card-title">Change Request List</h3>
 
             </div>
             <div class="card-body">
@@ -75,21 +75,19 @@ $script = <<<JS
           $('#table').DataTable({
            
             //serverSide: true,  
-            ajax: url+'vehiclerequisition/list',
+            ajax: url+'change-request/list',
             paging: true,
             columns: [
                 { title: 'No' ,data: 'No'},
-                { title: 'Employee No' ,data: 'Employee_No'},
-                { title: 'Requisition Date' ,data: 'Requisition_Date'},
-                { title: 'Reason For Booking' ,data: 'Reason_For_Booking'},
-                { title: 'Department' ,data: 'Department'},
-                
-                { title: 'Status' ,data: 'Booking_Requisition_Status'},
+                { title: 'Nature of Change' ,data: 'Nature_of_Change'},
+                { title: 'Employee No.' ,data: 'Employee_No'},
+                { title: 'Employee Name' ,data: 'Employee_Name'},
+                { title: 'Status' ,data: 'Status'},
                 { title: 'Action', data: 'Action' },
                                
             ] ,                              
            language: {
-                "zeroRecords": "No Vehicle Requisitions to display"
+                "zeroRecords": "No Change Requests to display"
             },
             
             order : [[ 0, "desc" ]]
