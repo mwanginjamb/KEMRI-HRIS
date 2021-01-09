@@ -28,7 +28,7 @@ Yii::$app->session->set('isSupervisor',false);*/
                 'confirm' => 'Are you sure you want to send this document for approval?',
                 'params'=>[
                     'No'=> $model->No,
-                    'employeeNo' => Yii::$app->user->identity->{'Employee_No'},
+                    'employeeNo' => Yii::$app->user->identity->{'Employee No_'},
                 ],
                 'method' => 'get',
         ],
@@ -484,6 +484,116 @@ Yii::$app->session->set('isSupervisor',false);*/
                                         <td data-key="<?= $qobj->Key ?>" data-name="Institution_Company" data-no="<?= $qobj->Line_No ?>" data-filter-field="Line_No" data-service="EmployeeQualificationsChange" ondblclick="addInput(this)"><?= !empty($qobj->Institution_Company)?$qobj->Institution_Company:'Not Set' ?></td>
                                         <td data-key="<?= $qobj->Key ?>" data-name="Comment" data-no="<?= $qobj->Line_No ?>" data-filter-field="Line_No" data-service="EmployeeQualificationsChange" ondblclick="addInput(this)"><?= !empty($qobj->Comment)?$qobj->Comment:'Not Set' ?></td>
                                         <td data-key="<?= $qobj->Key ?>" data-name="Action" data-no="<?= $qobj->Line_No ?>" data-filter-field="Line_No" data-service="EmployeeQualificationsChange" ondblclick="addDropDown(this,'action')"><?= !empty($qobj->Action)?$qobj->Action:'Not Set' ?></td>
+
+
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php } ?>
+
+                </div>
+            </div>
+
+
+            <!--Emergency Contact Change-->
+
+            <div class="card" id="Employee_Emergency_Contacts_C">
+                <div class="card-header">
+                    <div class="card-title">
+                       Emergency Contact Change    <?= Html::a('Add',['emergency-contact/create','No' => $model->No],['class' => 'add-line btn btn-sm btn-info']) ?>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <?php
+
+                    if(is_array($model->emergency)){ //show Lines ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <td><b>Full_Name</b></td>
+                                    <td><b>Relationship</b></td>
+                                    <td><b>Phone_No</b></td>
+                                    <td><b>Email_Address</b></td>
+                                    <td><b>Action</b></td>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                // print '<pre>'; print_r($model->getObjectives()); exit;
+                                foreach($model->emergency as $emobj):
+                                    $updateLink = Html::a('<i class="fa fa-edit"></i>',['emergency/update','No'=> $emobj->Line_No],['class' => 'update-emobjective btn btn-outline-info btn-xs']);
+                                    $deleteLink = Html::a('<i class="fa fa-trash"></i>',['emergency/delete','Key'=> $emobj->Key ],['class'=>'delete btn btn-outline-danger btn-xs']);
+                                    ?>
+                                    <tr>
+
+                                        <td data-key="<?= $emobj->Key ?>" data-name="Full_Name" data-no="<?= $emobj->Line_No ?>" data-filter-field="Line_No" data-service="EmployeeEmergencyContacts" ondblclick="addInput(this)"><?= !empty($emobj->Full_Name)?$emobj->Full_Name:'Not Set' ?></td>
+                                        <td data-key="<?= $emobj->Key ?>" data-name="Relationship" data-no="<?= $emobj->Line_No ?>" data-filter-field="Line_No" data-service="EmployeeEmergencyContacts" ondblclick="addDropDown(this,'relatives')"><?= !empty($emobj->Relationship)?$emobj->Relationship:'Not Set' ?></td>
+                                        <td data-key="<?= $emobj->Key ?>" data-name="Phone_No" data-no="<?= $emobj->Line_No ?>" data-filter-field="Line_No" data-service="EmployeeEmergencyContacts" ondblclick="addInput(this)"><?= !empty($emobj->Phone_No)?$emobj->Phone_No:'Not Set' ?></td>
+                                        <td data-key="<?= $emobj->Key ?>" data-name="Email_Address" data-no="<?= $emobj->Line_No ?>" data-filter-field="Line_No" data-service="EmployeeEmergencyContacts" ondblclick="addInput(this)"><?= !empty($emobj->Email_Address)?$emobj->Email_Address:'Not Set' ?></td>
+                                        <td data-key="<?= $emobj->Key ?>" data-name="Action" data-no="<?= $emobj->Line_No ?>" data-filter-field="Line_No" data-service="EmployeeEmergencyContacts" ondblclick="addDropDown(this,'action')"><?= !empty($emobj->Action)?$emobj->Action:'Not Set' ?></td>
+
+
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php } ?>
+
+                </div>
+            </div>
+
+
+            <!---Miscelleneous change Req-->
+
+            <div class="card" id="Misc_artical_information_ch">
+                <div class="card-header">
+                    <div class="card-title">
+                       Miscelleneous Change    <?= Html::a('Add',['misc/create','No' => $model->No],['class' => 'add-line btn btn-sm btn-info']) ?>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <?php
+
+            if(is_array($model->misc)){ //show Lines ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <td><b>Misc_Article_Code</b></td>
+                                    <td><b>Description</b></td>
+                                    <td><b>From_Date</b></td>
+                                    <td><b>To_Date</b></td>
+                                    <td><b>Serial_No</b></td>
+                                    <td><b>Asset_Number</b></td>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                // print '<pre>'; print_r($model->getObjectives()); exit;
+                foreach($model->misc as $miscobj):
+                    $updateLink = Html::a('<i class="fa fa-edit"></i>',['emergency/update','No'=> $miscobj->Line_No],['class' => 'update-miscobjective btn btn-outline-info btn-xs']);
+                    $deleteLink = Html::a('<i class="fa fa-trash"></i>',['emergency/delete','Key'=> $miscobj->Key ],['class'=>'delete btn btn-outline-danger btn-xs']);
+                    ?>
+                                    <tr>
+
+                                        <td data-key="<?= $miscobj->Key ?>" data-name="Misc_Article_Code" data-no="<?= $miscobj->Line_No ?>" data-filter-field="Line_No" data-service="Miscinformation" ondblclick="addDropDown(this, 'misc-code')"><?= !empty($miscobj->Misc_Article_Code)?$miscobj->Misc_Article_Code:'Not Set' ?></td>
+                                        <td data-key="<?= $miscobj->Key ?>" data-name="Description" data-no="<?= $miscobj->Line_No ?>" data-filter-field="Line_No" data-service="Miscinformation" ondblclick="addDropDown(this,'relatives')"><?= !empty($miscobj->Description)?$miscobj->Description:'Not Set' ?></td>
+                                        <td data-key="<?= $miscobj->Key ?>" data-name="From_Date" data-no="<?= $miscobj->Line_No ?>" data-filter-field="Line_No" data-service="Miscinformation" ondblclick="addInput(this, 'date')"><?= !empty($miscobj->From_Date)?$miscobj->From_Date:'Not Set' ?></td>
+                                        <td data-key="<?= $miscobj->Key ?>" data-name="To_Date" data-no="<?= $miscobj->Line_No ?>" data-filter-field="Line_No" data-service="Miscinformation" ondblclick="addInput(this, 'date')"><?= !empty($miscobj->To_Date)?$miscobj->To_Date:'Not Set' ?></td>
+                                        <td data-key="<?= $miscobj->Key ?>" data-name="Serial_No" data-no="<?= $miscobj->Line_No ?>" data-filter-field="Line_No" data-service="Miscinformation" ondblclick="addDropDown(this,'action')"><?= !empty($miscobj->Serial_No)?$miscobj->Serial_No:'Not Set' ?></td>
+                                        <td data-key="<?= $miscobj->Key ?>" data-name="Asset_Number" data-no="<?= $miscobj->Line_No ?>" data-filter-field="Line_No" data-service="Miscinformation" ondblclick="addInput(this)"><?= !empty($miscobj->Asset_Number)?$emobj->Asset_Number:'Not Set' ?></td>
 
 
                                     </tr>

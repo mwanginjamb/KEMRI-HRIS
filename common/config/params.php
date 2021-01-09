@@ -230,6 +230,7 @@ return [
         'Relatives' => 'Relatives', //5208
         'Professional' => 'Professional', //50071
         'Qualifications' => 'Qualifications', //5205
+        'MiscArticles' => 'MiscArticles', //5218
 
 
         /**********************KEMRI Salary Increment****************************************/
@@ -237,6 +238,20 @@ return [
         'SalaryIncrementList' => 'SalaryIncrementList', // 55025
         'SalaryIncrementCard' => 'SalaryIncrementCard', // 55026
 
+        /**********************KEMRI EXMPLOYEE EXIT*********************************************/
+
+        'ExitList' => 'ExitList', //52002
+        'ExitListCard' => 'ExitListCard', // 52003
+        'FinalDues' => 'FinalDues', // 52034
+
+        'ClearanceFormList' => 'ClearanceFormList', //52025
+        'ClearanceFormCard' => 'ClearanceFormCard', //52026
+        'LibraryClearanceLines' => 'LibraryClearanceLines', //52027
+        'LabClearanceLines' => 'LabClearanceLines', //52029
+        'ICTClearanceLines' => 'ICTClearanceLines', //52030
+        'StoreCLearanceForm' => 'StoreCLearanceForm', //52031
+        'AssignedAssetsClearance' => 'AssignedAssetsClearance', //52033
+        'EmployeeExitManagement' => 'EmployeeExitManagement', //50233 - CodeUnit--------------
 
 
 

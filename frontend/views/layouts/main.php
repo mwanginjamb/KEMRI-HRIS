@@ -328,14 +328,14 @@ $employee = (!Yii::$app->user->isGuest && is_array(Yii::$app->user->identity->em
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>change-request" class="nav-link <?= Yii::$app->recruitment->currentaction('recruitment','vacancies')?'active':'' ?>">
+                                    <a href="<?= $absoluteUrl ?>change-request" class="nav-link <?= Yii::$app->recruitment->currentaction('change-request','index')?'active':'' ?>">
                                         <i class="fa fa-check-square nav-icon"></i>
                                         <p>Change Request List </p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>change-request/create" class="nav-link <?= Yii::$app->recruitment->currentaction('recruitment','externalvacancies')?'active':'' ?>">
+                                    <a href="<?= $absoluteUrl ?>change-request/create" class="nav-link <?= Yii::$app->recruitment->currentaction('change-request','create')?'active':'' ?>">
                                         <i class="fa fa-check-square nav-icon"></i>
                                         <p>Create New Request </p>
                                     </a>
@@ -344,6 +344,50 @@ $employee = (!Yii::$app->user->isGuest && is_array(Yii::$app->user->identity->em
                             </ul>
                         </li>
 
+
+                        <!--Exit Management-->
+
+                        <li class="nav-item has-treeview <?= Yii::$app->recruitment->currentCtrl(Yii::$app->params['profileControllers'])?'menu-open':'' ?>">
+                            <a href="#" class="nav-link <?= Yii::$app->recruitment->currentCtrl('recruitment')?'active':'' ?>">
+                                <i class="nav-icon fas fa-briefcase " ></i>
+                                <p>
+                                    Employee Exit
+                                    <i class="fas fa-angle-left right"></i>
+                                    <!--<span class="badge badge-info right">6</span>-->
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="<?= $absoluteUrl ?>exit" class="nav-link <?= Yii::$app->recruitment->currentaction('exit','index')?'active':'' ?>">
+                                        <i class="fa fa-check-square nav-icon"></i>
+                                        <p>Exit List </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="<?= $absoluteUrl ?>exit/create" class="nav-link <?= Yii::$app->recruitment->currentaction('exit','create')?'active':'' ?>">
+                                        <i class="fa fa-check-square nav-icon"></i>
+                                        <p>Create New Request </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="<?= $absoluteUrl ?>exit-form" class="nav-link <?= Yii::$app->recruitment->currentaction('exit-form','index')?'active':'' ?>">
+                                        <i class="fa fa-check-square nav-icon"></i>
+                                        <p>Exit Form List </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="<?= $absoluteUrl ?>exit-form/create" class="nav-link <?= Yii::$app->recruitment->currentaction('exit-form','create')?'active':'' ?>">
+                                        <i class="fa fa-check-square nav-icon"></i>
+                                        <p>Create an Exit Form </p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
 
                         <!--Salary Increment-->
 

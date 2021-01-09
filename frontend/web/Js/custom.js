@@ -34,6 +34,7 @@ function addInput(elm,type = false) {
   }
 
   input.setAttribute('value', value);
+  input.setAttribute('class','form-control');
   input.setAttribute('onBlur', 'closeInput(this)');
   elm.appendChild(input);
   input.focus();
@@ -47,7 +48,7 @@ async function addDropDown(elm,resource) {
 
   const ddContent = await getData(resource);
 
-  console.log(ddContent);
+  console.table(ddContent);
 
 
   var select = document.createElement('select');
@@ -67,7 +68,7 @@ async function addDropDown(elm,resource) {
         select.appendChild(option);
   }
 
-
+  select.setAttribute('class','form-control');
   select.setAttribute('onChange', 'closeInput(this)');
   elm.appendChild(select);
   select.focus();

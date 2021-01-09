@@ -11,6 +11,7 @@ use frontend\models\Careerdevelopmentstrength;
 use frontend\models\Changerequest;
 use frontend\models\Dependant;
 use frontend\models\Employeeappraisalkra;
+use frontend\models\ExitForm;
 use frontend\models\Experience;
 use frontend\models\Imprestcard;
 use frontend\models\Imprestline;
@@ -33,7 +34,7 @@ use frontend\models\Leave;
 use yii\web\Response;
 use kartik\mpdf\Pdf;
 
-class ChangeRequestController extends Controller
+class ExitFormController extends Controller
 {
     public function behaviors()
     {
@@ -308,13 +309,30 @@ class ChangeRequestController extends Controller
     }
 
 
+    public function actionReturned()
+    {
+
+        $changes = [
+            ['Code' => '_blank_','Desc' => '_blank_'],
+            ['Code' => 'Yes' ,'Desc' =>'Yes'],
+            ['Code' => 'No' ,'Desc' =>'No'],
+            ['Code' => 'N_A' ,'Desc' =>'N_A'],
+
+        ];
+
+        $data =  ArrayHelper::map($changes,'Code','Desc');
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
+
 
     public function actionView($No){
-        $model = new Changerequest();
-        $service = Yii::$app->params['ServiceName']['ChangeRequestCard'];
+        $model = new ExitForm();
+        $service = Yii::$app->params['ServiceName']['ClearanceFormCard'];
 
         $filter = [
-            'No' => $No
+            'Form_No' => $No
         ];
 
         $result = Yii::$app->navhelper->getData($service, $filter);
@@ -332,7 +350,7 @@ class ChangeRequestController extends Controller
    // Get Vehicle Requisition list
 
     public function actionList(){
-        $service = Yii::$app->params['ServiceName']['ChangeRequestList'];
+        $service = Yii::$app->params['ServiceName']['ClearanceFormList'];
         $filter = [
             'Employee_No' => Yii::$app->user->identity->Employee[0]->No,
         ];
@@ -341,22 +359,19 @@ class ChangeRequestController extends Controller
         $result = [];
         foreach($results as $item){
 
-            if(!empty($item->No ))
+            if(!empty($item->Form_No ))
             {
                 $link = $updateLink = $deleteLink =  '';
-                $Viewlink = Html::a('<i class="fas fa-eye"></i>',['view','No'=> $item->No ],['class'=>'btn btn-outline-primary btn-xs','title' => 'View Request.' ]);
-                if($item->Status == 'New'){
-                    $link = Html::a('<i class="fas fa-paper-plane"></i>',['send-for-approval','No'=> $item->No ],['title'=>'Send Approval Request','class'=>'btn btn-primary btn-xs']);
-                    $updateLink = Html::a('<i class="far fa-edit"></i>',['update','No'=> $item->No ],['class'=>'btn btn-info btn-xs','title' => 'Update Request']);
-                }
+                $Viewlink = Html::a('<i class="fas fa-eye"></i>',['view','No'=> $item->Form_No ],['class'=>'btn btn-outline-primary btn-xs','title' => 'View Request.' ]);
+                
 
                 $result['data'][] = [
                     'Key' => $item->Key,
-                    'No' => $item->No,
-                    'Nature_of_Change' => !empty($item->Nature_of_Change)?$item->Nature_of_Change:'',
+                    'No' => $item->Form_No,
+                    'Exit_No' => !empty($item->Exit_No)?$item->Exit_No:'',
                     'Employee_No' => !empty($item->Employee_No)?$item->Employee_No:'',
                     'Employee_Name' => !empty($item->Employee_Name)?$item->Employee_Name:'',
-                    'Status' => !empty($item->Status)?$item->Status:'',
+                
                     'Action' => $link.' '. $updateLink.' '.$Viewlink ,
 
                 ];

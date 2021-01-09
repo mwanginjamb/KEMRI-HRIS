@@ -13,16 +13,20 @@ use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
 
-class Changerequest extends Model
+class ExitForm extends Model
 {
 
 public $Key;
-public $No;
-public $Nature_of_Change;
+public $Form_No;
+public $Exit_No;
 public $Employee_No;
 public $Employee_Name;
-public $Approval_Entries;
-public $Status;
+public $Global_Dimension_1_Code;
+public $Global_Dimension_2_Code;
+public $Global_Dimension_3_Code;
+public $Global_Dimension_4_Code;
+public $Global_Dimension_5_Code;
+public $Action_ID;
 public $isNewRecord;
 
 
@@ -37,28 +41,19 @@ public $isNewRecord;
     public function attributeLabels()
     {
         return [
-
+            'Global_Dimension_1_Code' => 'Department Code',
+            'Global_Dimension_2_Code' => 'Project Code',
+            'Global_Dimension_3_Code' => 'Department Code',
+            'Global_Dimension_4_Code' => 'Project Code',
+            'Global_Dimension_5_Code' => 'CustomerGroup Code'
         ];
     }
 
-    /*Get Dependant*/
-    public function getDependants(){
-        $service = Yii::$app->params['ServiceName']['EmployeeDepandants'];
+    /*Get Library Clearance Lines*/
+    public function getLibrary(){
+        $service = Yii::$app->params['ServiceName']['LibraryClearanceLines'];
         $filter = [
-            'Change_No' => $this->No,
-        ];
-
-        $lines = Yii::$app->navhelper->getData($service, $filter);
-        return $lines;
-
-    }
-
-    /*Get Relatives*/
-
-    public function getRelatives(){
-        $service = Yii::$app->params['ServiceName']['EmployeeRelativesChange'];
-        $filter = [
-            'Change_No' => $this->No,
+            'Exit_no' => $this->Exit_No,
         ];
 
         $lines = Yii::$app->navhelper->getData($service, $filter);
@@ -66,12 +61,12 @@ public $isNewRecord;
 
     }
 
-    /*Get Beneficiaries*/
+    /*Get Lab Lines*/
 
-    public function getBeneficiaries(){
-        $service = Yii::$app->params['ServiceName']['EmployeeBeneficiariesChange'];
+    public function getLab(){
+        $service = Yii::$app->params['ServiceName']['LabClearanceLines'];
         $filter = [
-            'Change_No' => $this->No,
+            'Exit_no' => $this->Exit_No,
         ];
 
         $lines = Yii::$app->navhelper->getData($service, $filter);
@@ -79,12 +74,12 @@ public $isNewRecord;
 
     }
 
-    /*Get work History*/
+    /*Get ICT lINES*/
 
-    public function getWorkHistory(){
-        $service = Yii::$app->params['ServiceName']['EmployeeWorkHistoryChange'];
+    public function getICT(){
+        $service = Yii::$app->params['ServiceName']['ICTClearanceLines'];
         $filter = [
-            'Change_No' => $this->No,
+            'Exit_no' => $this->Exit_No,
         ];
 
         $lines = Yii::$app->navhelper->getData($service, $filter);
@@ -92,11 +87,12 @@ public $isNewRecord;
 
     }
 
-    /*Get Proffessional Bodies*/
-    public function getProfessional(){
-        $service = Yii::$app->params['ServiceName']['EmployeeProffesionalBodies'];
+    /*Get Store Clearance Lines */
+
+    public function getStore(){
+        $service = Yii::$app->params['ServiceName']['StoreCLearanceForm'];
         $filter = [
-            'Change_No' => $this->No,
+            'Exit_no' => $this->Exit_No,
         ];
 
         $lines = Yii::$app->navhelper->getData($service, $filter);
@@ -104,12 +100,11 @@ public $isNewRecord;
 
     }
 
-    /*Get Qualifications*/
-
-    public function getQualifications(){
-        $service = Yii::$app->params['ServiceName']['EmployeeQualificationsChange'];
+    /* Get Assigned Assets Lines*/
+    public function getAssets(){
+        $service = Yii::$app->params['ServiceName']['AssignedAssetsClearance'];
         $filter = [
-            'Change_No' => $this->No,
+            'Exit_no' => $this->Exit_No,
         ];
 
         $lines = Yii::$app->navhelper->getData($service, $filter);
@@ -118,31 +113,6 @@ public $isNewRecord;
     }
 
 
-    /*Get Emergency Contacts*/
-
-    public function getEmergency(){
-        $service = Yii::$app->params['ServiceName']['EmployeeEmergencyContacts'];
-        $filter = [
-            'Change_No' => $this->No,
-        ];
-
-        $lines = Yii::$app->navhelper->getData($service, $filter);
-        return $lines;
-
-    }
-
-    /*Miscellaneous shit*/
-
-    public function getMisc(){
-        $service = Yii::$app->params['ServiceName']['Miscinformation'];
-        $filter = [
-            'Change_No' => $this->No,
-        ];
-
-        $lines = Yii::$app->navhelper->getData($service, $filter);
-        return $lines;
-
-    }
 
 
 
