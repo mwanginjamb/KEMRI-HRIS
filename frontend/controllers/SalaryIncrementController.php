@@ -7,8 +7,8 @@
  */
 
 namespace frontend\controllers;
-use frontend\models\Contractrenewal;
-use frontend\models\Storerequisition;
+use frontend\models\Purchaserequisition;
+use frontend\models\SalaryIncrement;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\ContentNegotiator;
@@ -20,7 +20,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Response;
 use kartik\mpdf\Pdf;
 
-class ContractrenewalController extends Controller
+class SalaryIncrementController extends Controller
 {
     public function behaviors()
     {
@@ -67,28 +67,30 @@ class ContractrenewalController extends Controller
 
 
     public function actionCreate(){
-
-        $model = new Contractrenewal();
-        $service = Yii::$app->params['ServiceName']['ContractRenewalCard'];
+       // Yii::$app->recruitment->printrr($this->getPayrollscales());
+        $model = new SalaryIncrement();
+        $service = Yii::$app->params['ServiceName']['SalaryIncrementCard'];
 
         /*Do initial request */
-        if(!isset(Yii::$app->request->post()['Contractrenewal'])){
-            $model->Employee_No = Yii::$app->user->identity->Employee_No;
+        if(!isset(Yii::$app->request->post()['SalaryIncrement'])){
+            $model->Employee_No = Yii::$app->user->identity->{'Employee No_'};
             $request = Yii::$app->navhelper->postData($service, $model);
             if(!is_string($request) )
             {
                 Yii::$app->navhelper->loadmodel($request,$model);
             }else{
-               // Yii::$app->recruitment->printrr($request);
-                Yii::$app->session->setFlash('error', $request);
-                return $this->render('create',[
+
+                Yii::$app->session->setFlash('error',$request);
+                 return $this->render('create',[
                     'model' => $model,
-                    'employees' => $this->getEmployees()
+                    'programs' => $this->getPrograms(),
+                    'departments' => $this->getDepartments(),
+                     'grades' => $this->getPayrollscales(),
                 ]);
             }
         }
 
-        if(Yii::$app->request->post() && Yii::$app->navhelper->loadpost(Yii::$app->request->post()['Contractrenewal'],$model) ){
+        if(Yii::$app->request->post() && Yii::$app->navhelper->loadpost(Yii::$app->request->post()['SalaryIncrement'],$model) ){
 
 
             $result = Yii::$app->navhelper->updateData($service,$model);
@@ -110,7 +112,9 @@ class ContractrenewalController extends Controller
 
         return $this->render('create',[
             'model' => $model,
-            'employees' => $this->getEmployees()
+            'programs' => $this->getPrograms(),
+            'departments' => $this->getDepartments(),
+            'grades' => $this->getPayrollscales(),
         ]);
     }
 
@@ -118,16 +122,14 @@ class ContractrenewalController extends Controller
 
 
     public function actionUpdate($No){
-        $model = new Contractrenewal();
-        $service = Yii::$app->params['ServiceName']['ContractRenewalCard'];
+        $model = new SalaryIncrement();
+        $service = Yii::$app->params['ServiceName']['SalaryIncrementCard'];
         $model->isNewRecord = false;
 
         $filter = [
             'No' => $No,
         ];
         $result = Yii::$app->navhelper->getData($service,$filter);
-
-        // Yii::$app->recruitment->printrr($result);
 
         if(is_array($result)){
             //load nav result to model
@@ -137,7 +139,7 @@ class ContractrenewalController extends Controller
         }
 
 
-        if(Yii::$app->request->post() && Yii::$app->navhelper->loadpost(Yii::$app->request->post()['Contractrenewal'],$model) ){
+        if(Yii::$app->request->post() && Yii::$app->navhelper->loadpost(Yii::$app->request->post()['SalaryIncrement'],$model) ){
 
             $result = Yii::$app->navhelper->updateData($service,$model);
 
@@ -160,19 +162,25 @@ class ContractrenewalController extends Controller
         if(Yii::$app->request->isAjax){
             return $this->renderAjax('update', [
                 'model' => $model,
-                'employees' => $this->getEmployees(),
+                'programs' => $this->getPrograms(),
+                'departments' => $this->getDepartments(),
+                'grades' => $this->getPayrollscales(),
+
+
             ]);
         }
 
         return $this->render('update',[
             'model' => $model,
-            'employees' => $this->getEmployees()
+            'programs' => $this->getPrograms(),
+            'departments' => $this->getDepartments(),
+            'grades' => $this->getPayrollscales(),
 
         ]);
     }
 
     public function actionDelete(){
-        $service = Yii::$app->params['ServiceName']['ContractRenewalCard'];
+        $service = Yii::$app->params['ServiceName']['SalaryIncrementCard'];
         $result = Yii::$app->navhelper->deleteData($service,Yii::$app->request->get('Key'));
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         if(!is_string($result)){
@@ -184,8 +192,8 @@ class ContractrenewalController extends Controller
     }
 
     public function actionView($No){
-        $model = new Contractrenewal();
-        $service = Yii::$app->params['ServiceName']['ContractRenewalCard'];
+        $model = new SalaryIncrement();
+        $service = Yii::$app->params['ServiceName']['SalaryIncrementCard'];
 
         $filter = [
             'No' => $No
@@ -206,18 +214,22 @@ class ContractrenewalController extends Controller
    // Get list
 
     public function actionList(){
-        $service = Yii::$app->params['ServiceName']['ContractRenewalList'];
+        $service = Yii::$app->params['ServiceName']['SalaryIncrementList'];
         $filter = [
             'Employee_No' => Yii::$app->user->identity->{'Employee No_'},
         ];
 
+
+
         $results = \Yii::$app->navhelper->getData($service,$filter);
+        //Yii::$app->recruitment->printrr($results);
         $result = [];
         foreach($results as $item){
 
             if(!empty($item->No ))
             {
                 $link = $updateLink = $deleteLink =  '';
+
                 $Viewlink = Html::a('<i class="fas fa-eye"></i>',['view','No'=> $item->No ],['class'=>'btn btn-outline-primary btn-xs','title' => 'View Request.' ]);
                 if($item->Approval_Status == 'New'){
                     $link = Html::a('<i class="fas fa-paper-plane"></i>',['send-for-approval','No'=> $item->No ],['title'=>'Send Approval Request','class'=>'btn btn-primary btn-xs']);
@@ -230,15 +242,13 @@ class ContractrenewalController extends Controller
                     'Key' => $item->Key,
                     'No' => $item->No,
                     'Employee_No' => !empty($item->Employee_No)?$item->Employee_No:'',
-                    'Employee_Name' => !empty($item->Created_On)?$item->Created_On:'',
-                    'Approval_Status' => $item->Approval_Status,
+                    'Employee_Name' => !empty($item->Employee_Name)?$item->Employee_Name:'',
+                    'Status' => !empty($item->Approval_Status)?$item->Approval_Status:'',
                     'Action' => $link.' '. $updateLink.' '.$Viewlink ,
 
                 ];
             }
-
         }
-
         return $result;
     }
 
@@ -268,6 +278,35 @@ class ContractrenewalController extends Controller
         return ArrayHelper::map($result,'Code','Name');
     }
 
+    public function getPayrollscales()
+    {
+        $service = Yii::$app->params['ServiceName']['PayrollScales'];
+        $result = Yii::$app->navhelper->getData($service, []);
+
+         return Yii::$app->navhelper->refactorArray($result,'Scale','Sequence');
+    }
+
+    public function actionPointerDd($scale)
+    {
+        $service = Yii::$app->params['ServiceName']['PayrollScalePointers'];
+        $filter = ['Scale' => $scale];
+        $result = Yii::$app->navhelper->getData($service, $filter);
+
+        $data = Yii::$app->navhelper->refactorArray($result, 'Pointer','Pointer');
+
+        if(count($data) )
+        {
+            foreach($data  as $k => $v )
+            {
+                echo "<option value='$k'>".$v."</option>";
+            }
+        }else{
+            echo "<option value=''>No data Available</option>";
+        }
+    }
+
+
+
     /* Get Dimension 3*/
 
     public function getD3(){
@@ -279,6 +318,8 @@ class ContractrenewalController extends Controller
         $result = \Yii::$app->navhelper->getData($service, $filter);
         return ArrayHelper::map($result,'Code','Name');
     }
+
+    
 
 
 
@@ -302,9 +343,12 @@ class ContractrenewalController extends Controller
                 }
 
             }
+
+
+
         }
 
-        return ArrayHelper::map($data,'No','Full_Name');
+        return $data;
     }
 
 
@@ -317,25 +361,25 @@ class ContractrenewalController extends Controller
 
     /* Call Approval Workflow Methods */
 
-    public function actionSendForApproval()
+    public function actionSendForApproval($No)
     {
         $service = Yii::$app->params['ServiceName']['PortalFactory'];
 
         $data = [
-            'applicationNo' => Yii::$app->request->get('No'),
-            'sendMail' => true,
+            'applicationNo' => $No,
+            'sendMail' => 1,
             'approvalUrl' => '',
         ];
 
 
-        $result = Yii::$app->navhelper->PortalWorkFlows($service,$data,'IanSendLeavePlanForApproval');
+        $result = Yii::$app->navhelper->PortalWorkFlows($service,$data,'IanSendRequisitionHeaderForApproval');
 
         if(!is_string($result)){
-            Yii::$app->session->setFlash('success', 'Request Sent to Supervisor Successfully.', true);
-            return $this->redirect(['view','No' => Yii::$app->request->get('No')]);
+            Yii::$app->session->setFlash('success', 'Approval Request Sent to Supervisor Successfully.', true);
+            return $this->redirect(['view','No' => $No]);
         }else{
 
-            Yii::$app->session->setFlash('error', 'Error Sending  Request for Approval  : '. $result);
+            Yii::$app->session->setFlash('error', 'Error Sending Approval Request for Approval  : '. $result);
             return $this->redirect(['view','No' => $No]);
 
         }
@@ -343,26 +387,55 @@ class ContractrenewalController extends Controller
 
     /*Cancel Approval Request */
 
-    public function actionCancelRequest($Plan_No)
+    public function actionCancelRequest($No)
     {
         $service = Yii::$app->params['ServiceName']['PortalFactory'];
 
         $data = [
-            'applicationPlan_No' => $Plan_No,
+            'applicationNo' => $No,
         ];
 
 
-        $result = Yii::$app->navhelper->PortalWorkFlows($service,$data,'IanCancelLeavePlanApprovalRequest');
+        $result = Yii::$app->navhelper->PortalWorkFlows($service,$data,'IanCancelRequisitionHeaderApprovalRequest');
 
         if(!is_string($result)){
-            Yii::$app->session->setFlash('success', 'Request Cancelled Successfully.', true);
-            return $this->redirect(['view','Plan_No' => $Plan_No]);
+            Yii::$app->session->setFlash('success', 'Approval Request Cancelled Successfully.', true);
+            return $this->redirect(['view','No' => $No]);
         }else{
 
-            Yii::$app->session->setFlash('error', 'Error Cancelling Approval Request.  : '. $result);
-            return $this->redirect(['view','Plan_No' => $Plan_No]);
+            Yii::$app->session->setFlash('error', 'Error Cancelling Approval Approval Request.  : '. $result);
+            return $this->redirect(['view','No' => $No]);
 
         }
+    }
+
+    public function actionSetGrade(){
+        $model = new SalaryIncrement();
+        $service = Yii::$app->params['ServiceName']['SalaryIncrementCard'];
+
+        $filter = [
+            'No' => Yii::$app->request->post('No')
+        ];
+        $request = Yii::$app->navhelper->getData($service, $filter);
+
+        if(is_array($request)){
+            Yii::$app->navhelper->loadmodel($request[0],$model);
+            $model->Key = $request[0]->Key;
+            $model->New_Grade = Yii::$app->request->post('New_Grade');
+            $model->New_Pointer = Yii::$app->request->post('New_Pointer');
+
+        }else{
+            Yii::$app->response->format = \yii\web\response::FORMAT_JSON;
+            return $request;
+        }
+
+
+        $result = Yii::$app->navhelper->updateData($service,$model);
+
+        Yii::$app->response->format = \yii\web\response::FORMAT_JSON;
+
+        return $result;
+
     }
 
 

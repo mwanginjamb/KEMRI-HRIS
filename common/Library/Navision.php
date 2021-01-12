@@ -983,6 +983,21 @@ class Navision extends Component
     }
 
 
+    // Employee Exit
+
+    public function EmployeeExit($credentials, $soapWsdl, $Entry,$method)
+    {
+        $client = $this->createClient($credentials, $soapWsdl);
+        try {
+            $result = $client->$method($Entry);
+            return $result;
+        } catch (\SoapFault $e) {
+            return $e->getMessage();
+        }
+
+    }
+
+
 
 
 

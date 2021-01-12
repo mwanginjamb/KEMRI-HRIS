@@ -12,18 +12,22 @@ use Yii;
 use yii\base\Model;
 
 
-class Overtime extends Model
+class SalaryIncrement extends Model
 {
 
 public $Key;
 public $No;
 public $Employee_No;
 public $Employee_Name;
-public $Global_Dimension_1_Code;
-public $Global_Dimension_2_Code;
-public $Hours_Worked;
-public $Status;
+public $Current_Grade;
+public $Current_Pointer;
+public $Current_Salary_Grade;
+public $New_Grade;
+public $New_Pointer;
+public $New_Salary_Grade;
+public $Approval_Entries;
 public $isNewRecord;
+public $Approval_Status;
 
     /*public function __construct(array $config = [])
     {
@@ -33,28 +37,26 @@ public $isNewRecord;
     public function rules()
     {
         return [
-
+            [['Amount_Requested','Loan_Type','Purpose'], 'required'],
+            ['Amount_Requested','integer','min'=> 1]
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'Global_Dimension_1_Code' => 'Department Code',
-            'Global_Dimension_2_Code' => 'Project Code',
+
         ];
     }
 
     public function getLines(){
-        $service = Yii::$app->params['ServiceName']['OvertimeLine'];
+        $service = Yii::$app->params['ServiceName']['ContractChangeLines'];
         $filter = [
-            'Application_No' => $this->No,
+            'Change_No' => $this->No,
         ];
 
         $lines = Yii::$app->navhelper->getData($service, $filter);
        return $lines;
-
-
     }
 
 

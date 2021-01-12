@@ -81,9 +81,7 @@ $script = <<<JS
                 { title: 'No' ,data: 'No'},
                 { title: 'Employee No' ,data: 'Employee_No'},
                 { title: 'Employee Name' ,data: 'Employee_Name'},
-                { title: 'Contract Status' ,data: 'Contract_Status'},
                 { title: 'Approval Status' ,data: 'Approval_Status'},
-                
                 { title: 'Action', data: 'Action' },
                                
             ] ,                              

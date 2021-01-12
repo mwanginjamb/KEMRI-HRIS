@@ -405,16 +405,16 @@ $employee = (!Yii::$app->user->isGuest && is_array(Yii::$app->user->identity->em
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>recruitment/vacancies" class="nav-link <?= Yii::$app->recruitment->currentaction('recruitment','vacancies')?'active':'' ?>">
+                                    <a href="<?= $absoluteUrl ?>salary-increment" class="nav-link <?= Yii::$app->recruitment->currentaction('recruitment','vacancies')?'active':'' ?>">
                                         <i class="fa fa-check-square nav-icon"></i>
-                                        <p>Internal Job Vacancies </p>
+                                        <p>Salary Increment Liast </p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>recruitment/externalvacancies" class="nav-link <?= Yii::$app->recruitment->currentaction('recruitment','externalvacancies')?'active':'' ?>">
+                                    <a href="<?= $absoluteUrl ?>salary-increment/create" class="nav-link <?= Yii::$app->recruitment->currentaction('recruitment','externalvacancies')?'active':'' ?>">
                                         <i class="fa fa-check-square nav-icon"></i>
-                                        <p>External Job Vacancies </p>
+                                        <p>New Request </p>
                                     </a>
                                 </li>
 

@@ -19,9 +19,9 @@ public $Key;
 public $No;
 public $Employee_No;
 public $Employee_Name;
-public $isNewRecord;
-public $Status;
+public $Approval_Entries;
 public $Approval_Status;
+
 
 
     public function rules()
@@ -41,7 +41,7 @@ public $Approval_Status;
     public function getLines(){
         $service = Yii::$app->params['ServiceName']['ContractRenewalLines'];
         $filter = [
-            'Request_No' => $this->No,
+            'Change_No' => $this->No,
         ];
 
         $lines = Yii::$app->navhelper->getData($service, $filter);

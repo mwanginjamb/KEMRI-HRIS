@@ -11,7 +11,7 @@
 /* @var $this yii\web\View */
 
 $this->title = Yii::$app->params['generalTitle'];
-$this->params['breadcrumbs'][] = ['label' => 'Overtime List', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Salary Increment List', 'url' => ['index']];
 $this->params['breadcrumbs'][] = '';
 $url = \yii\helpers\Url::home(true);
 ?>
@@ -19,8 +19,8 @@ $url = \yii\helpers\Url::home(true);
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-        <?= \yii\helpers\Html::a('New Overtime Document',['create'],['class' => 'btn btn-info push-right', 'data' => [
-            'confirm' => 'Are you sure you want to create a new Document?',
+        <?= \yii\helpers\Html::a('New Salary Increment Requisition',['create'],['class' => 'btn btn-info push-right', 'data' => [
+            'confirm' => 'Are you sure you want to create a new Request?',
             'method' => 'get',
         ],]) ?>
             </div>
@@ -50,7 +50,7 @@ if(Yii::$app->session->hasFlash('success')){
     <div class="col-md-12">
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">Overtime List</h3>
+                <h3 class="card-title">Salary Increment List</h3>
 
             </div>
             <div class="card-body">
@@ -75,7 +75,7 @@ $script = <<<JS
           $('#table').DataTable({
            
             //serverSide: true,  
-            ajax: url+'overtime/list',
+            ajax: url+'salary-increment/list',
             paging: true,
             columns: [
                 { title: 'No' ,data: 'No'},
@@ -86,7 +86,7 @@ $script = <<<JS
                                
             ] ,                              
            language: {
-                "zeroRecords": "No Overtime records to display"
+                "zeroRecords": "No Salary Increments to display"
             },
             
             order : [[ 0, "desc" ]]

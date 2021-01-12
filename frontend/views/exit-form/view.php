@@ -132,8 +132,12 @@ Yii::$app->session->set('isSupervisor',false);*/
             <div class="card" id="Library">
                 <div class="card-header">
                     <div class="card-title">
-                       Library Clearance Lines    <?= Html::a('Add',['dependant/create','No' => $model->Form_No],['class' => 'add-line btn btn-sm btn-info']) ?>
+                       Library Clearance Lines
                     </div>
+                    <div class="card-tools">
+                        <?= Html::a('<i class="fas fa-plus-square mr-2"></i>Add',['library-clearance/create','No' => $model->Form_No],['class' => 'add-line btn btn-sm btn-info ml-auto']) ?>
+                    </div>
+
                 </div>
 
                 <div class="card-body">
@@ -187,7 +191,10 @@ Yii::$app->session->set('isSupervisor',false);*/
             <div class="card" id="Lab">
                 <div class="card-header">
                     <div class="card-title">
-                        Lab Clearance Lines    <?= Html::a('Add',['lab/create','No' => $model->Form_No],['class' => 'add-line btn btn-sm btn-info']) ?>
+                        Lab Clearance Lines
+                    </div>
+                    <div class="card-tools">
+                        <?= Html::a('<i class="fas fa-plus-square mr-2"></i>Add',['lab-clearance/create','No' => $model->Form_No],['class' => 'add-line btn btn-sm btn-info']) ?>
                     </div>
                 </div>
 
@@ -240,7 +247,10 @@ Yii::$app->session->set('isSupervisor',false);*/
             <div class="card" id="ICT_Clearance_Lines">
                 <div class="card-header">
                     <div class="card-title">
-                        ICT Clearance    <?= Html::a('Add',['ict-clearance/create','No' => $model->Form_No],['class' => 'add-line btn btn-sm btn-info']) ?>
+                        ICT Clearance
+                    </div>
+                    <div class="card-tools">
+                        <?= Html::a('<i class="fas fa-plus-square mr-2"></i>Add',['ict-clearance/create','No' => $model->Form_No],['class' => 'add-line btn btn-sm btn-info']) ?>
                     </div>
                 </div>
 
@@ -295,7 +305,10 @@ Yii::$app->session->set('isSupervisor',false);*/
             <div class="card" id="Store_CLearance_Form">
                 <div class="card-header">
                     <div class="card-title">
-                        Store Clearance Form    <?= Html::a('Add',['store-clearance/create','No' => $model->Form_No],['class' => 'add-line btn btn-sm btn-info']) ?>
+                        Store Clearance Form
+                    </div>
+                    <div class="card-tools">
+                        <?= Html::a('<i class="fas fa-plus-square mr-2"></i>Add',['store-clearance/create','No' => $model->Form_No],['class' => 'add-line btn btn-sm btn-info']) ?>
                     </div>
                 </div>
 
@@ -328,8 +341,8 @@ Yii::$app->session->set('isSupervisor',false);*/
 
                                         <td data-key="<?= $whobj->Key ?>" data-name="Employee_no" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="StoreCLearanceForm" ondblclick="addInput(this)"><?= !empty($whobj->Employee_no)?$whobj->Employee_no:'Not Set' ?></td>
                                         <td data-key="<?= $whobj->Key ?>" data-name="Exit_no" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="StoreCLearanceForm" ondblclick="addInput(this)"><?= !empty($whobj->Exit_no)?$whobj->Exit_no:'Not Set' ?></td>
-                                        <td data-key="<?= $whobj->Key ?>" data-name="Item_Description" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="StoreCLearanceForm" ondblclick="addInput(this, 'date')"><?= !empty($whobj->Item_Description)?$whobj->Item_Description:'Not Set' ?></td>
-                                        <td data-key="<?= $whobj->Key ?>" data-name="Item_Worth" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="StoreCLearanceForm" ondblclick="addInput(this, 'date')"><?= !empty($whobj->Item_Worth)?$whobj->Item_Worth:'Not Set' ?></td>
+                                        <td data-key="<?= $whobj->Key ?>" data-name="Item_Description" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="StoreCLearanceForm" ondblclick="addInput(this)"><?= !empty($whobj->Item_Description)?$whobj->Item_Description:'Not Set' ?></td>
+                                        <td data-key="<?= $whobj->Key ?>" data-name="Item_Worth" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="StoreCLearanceForm" ondblclick="addInput(this, 'number')"><?= !empty($whobj->Item_Worth)?$whobj->Item_Worth:'Not Set' ?></td>
 
                                     </tr>
                                 <?php endforeach; ?>
@@ -348,7 +361,10 @@ Yii::$app->session->set('isSupervisor',false);*/
             <div class="card" id="Assigned_Assets_Clearance">
                 <div class="card-header">
                     <div class="card-title">
-                        Assigned Assets Clearance Form    <?= Html::a('Add',['assigned-assets-clearance/create','No' => $model->Form_No],['class' => 'add-line btn btn-sm btn-info']) ?>
+                        Assigned Assets Clearance Form
+                    </div>
+                    <div class="card-tools">
+                        <?= Html::a('<i class="fas fa-plus-square mr-2"></i>Add',['assigned-assets-clearance/create','No' => $model->Form_No],['class' => 'add-line btn btn-sm btn-info']) ?>
                     </div>
                 </div>
 
@@ -380,13 +396,13 @@ Yii::$app->session->set('isSupervisor',false);*/
                                     ?>
                                     <tr>
 
-                                        <td data-key="<?= $whobj->Key ?>" data-name="Employee_No" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this)"><?= !empty($whobj->Employee_No)?$whobj->Employee_No:'Not Set' ?></td>
+                                        <td data-key="<?= $whobj->Key ?>" data-name="Employee_No" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ><?= !empty($whobj->Employee_No)?$whobj->Employee_No:'Not Set' ?></td>
                                         <td data-key="<?= $whobj->Key ?>" data-name="Misc_Article_Code" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this)"><?= !empty($whobj->Misc_Article_Code)?$whobj->Misc_Article_Code:'Not Set' ?></td>
-                                        <td data-key="<?= $whobj->Key ?>" data-name="Description" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this, 'date')"><?= !empty($whobj->Description)?$whobj->Description:'Not Set' ?></td>
-                                        <td data-key="<?= $whobj->Key ?>" data-name="Asset_Number" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this, 'date')"><?= !empty($whobj->Asset_Number)?$whobj->Asset_Number:'Not Set' ?></td>
-                                        <td data-key="<?= $whobj->Key ?>" data-name="Condition" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this, 'date')"><?= !empty($whobj->Condition)?$whobj->Condition:'Not Set' ?></td>
-                                        <td data-key="<?= $whobj->Key ?>" data-name="Returned" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this, 'date')"><?= !empty($whobj->Returned)?$whobj->Returned:'Not Set' ?></td>
-                                        <td data-key="<?= $whobj->Key ?>" data-name="Value_on_Return" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this, 'date')"><?= !empty($whobj->Value_on_Return)?$whobj->Value_on_Return:'Not Set' ?></td>
+                                        <td data-key="<?= $whobj->Key ?>" data-name="Description" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this)"><?= !empty($whobj->Description)?$whobj->Description:'Not Set' ?></td>
+                                        <td data-key="<?= $whobj->Key ?>" data-name="Asset_Number" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this)"><?= !empty($whobj->Asset_Number)?$whobj->Asset_Number:'Not Set' ?></td>
+                                        <td data-key="<?= $whobj->Key ?>" data-name="Condition" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addDropDown(this,'condition')"><?= !empty($whobj->Condition)?$whobj->Condition:'Not Set' ?></td>
+                                        <td data-key="<?= $whobj->Key ?>" data-name="Returned" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this, 'checkbox')"><?= !empty($whobj->Returned)?$whobj->Returned:'Not Set' ?></td>
+                                        <td data-key="<?= $whobj->Key ?>" data-name="Value_on_Return" data-no="<?= $whobj->Line_No ?>" data-filter-field="Line_No" data-service="AssignedAssetsClearance" ondblclick="addInput(this, 'number')"><?= !empty($whobj->Value_on_Return)?$whobj->Value_on_Return:'Not Set' ?></td>
 
                                     </tr>
                                 <?php endforeach; ?>

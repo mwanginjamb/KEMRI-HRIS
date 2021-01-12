@@ -325,6 +325,20 @@ class ExitFormController extends Controller
         return $data;
     }
 
+    public function actionCondition()
+    {
+
+        $changes = [
+            ['Code' => 'Good','Desc' => 'Good'],
+            ['Code' => 'Bad' ,'Desc' =>'Bad'],
+
+        ];
+
+        $data =  ArrayHelper::map($changes,'Code','Desc');
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
 
 
     public function actionView($No){

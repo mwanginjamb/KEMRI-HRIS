@@ -20,10 +20,16 @@ public $Contract_Start_Date;
 public $Contract_Period;
 public $Contract_End_Date;
 public $Notice_Period;
-public $Contract_Status;
-public $Request_No;
-public $Employee_No;
-public $Line_No;
+public $Job_Title;
+public $Line_Manager;
+public $Manager_Name;
+public $Department;
+public $Pointer;
+public $Grade;
+public $Salary;
+public $New_Salary;
+public $Status;
+public $Change_No;
 public $isNewRecord;
 
     public function rules()

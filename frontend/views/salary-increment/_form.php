@@ -55,14 +55,23 @@ $absoluteUrl = \yii\helpers\Url::home(true);
                             <?= $form->field($model, 'Key')->hiddenInput()->label(false) ?>
                             <?= $form->field($model, 'Employee_No')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
                             <?= $form->field($model, 'Employee_Name')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                            <?= $form->field($model, 'Current_Grade')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                            <?= $form->field($model, 'Current_Pointer')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
 
                         </div>
 
                         <div class="col-md-6">
-                            <?= $form->field($model, 'Global_Dimension_1_Code')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                            <?= $form->field($model, 'Global_Dimension_2_Code')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                            <?= $form->field($model, 'Hours_Worked')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-
+                            <?= $form->field($model, 'Current_Salary_Grade')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                            <?= $form->field($model, 'New_Grade')->dropDownList($grades, [
+                                'prompt' => 'Select Scale ...',
+                                'onchange' => '$.post("../salary-increment/pointer-dd?scale="+$(this).val(), (data) => {
+                                                $("select#salaryincrement-new_pointer").html( data );
+                                            })'
+                            ]) ?>
+                            <?= $form->field($model, 'New_Pointer')->dropDownList([]); ?>
+                            <?= $form->field($model, 'New_Salary_Grade')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                            <?= $form->field($model, 'Approval_Entries')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                            <?= $form->field($model, 'Approval_Status')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
 
                         </div>
 

@@ -5,23 +5,43 @@
 function closeInput(elm) {
   var td = elm.parentNode;
   var value = elm.value;
+  
+
+
+  /** Handle Checkbox state */
+  var child = td.children[0];
+
+  if(child.type == 'checkbox'){
+    value = (child.checked)? true: false;
+  }
+
+  /** Finish handling checkbox state */
+
+
+
   td.removeChild(elm);
   td.innerHTML = value;
 
   const data = td.dataset;
-  console.table(data);
-
+  // console.table(data);
 
   // Post Changes
-
-
+  field = document.querySelector(`#${data.validate}`);
   $.post('./commit',{'key':data.key,'name': data.name, 'no': data.no,'filterKey': data.filterField,'service': data.service, 'value': value }).done(function(msg){
-    console.log(msg);
+    console.log(data.validate);
+
+    if(data.validate)
+    {
+      const DataKey = data.validate;
+      field.innerText = msg[DataKey];
+    }
+
   });
 }
 
-function addInput(elm,type = false) {
+function addInput(elm,type = false, field = false ) {
   if (elm.getElementsByTagName('input').length > 0) return;
+
 
   var value = elm.innerHTML;
    elm.innerHTML = '';
@@ -34,6 +54,15 @@ function addInput(elm,type = false) {
   }
 
   input.setAttribute('value', value);
+
+  if(type === 'checkbox')
+  {
+    input.checked = event.target.value;  
+    
+  }
+
+
+
   input.setAttribute('class','form-control');
   input.setAttribute('onBlur', 'closeInput(this)');
   elm.appendChild(input);

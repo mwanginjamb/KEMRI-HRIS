@@ -11,9 +11,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\AgendaDocument */
 
-$this->title = 'Overtime Document';
-$this->params['breadcrumbs'][] = ['label' => 'Overtime Documents', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => 'New Overtime Document', 'url' => ['create']];
+$this->title = 'Salary Increment Request';
+$this->params['breadcrumbs'][] = ['label' => 'Salary Increment Requisitions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'New Request', 'url' => ['create']];
 //$this->params['breadcrumbs'][] = $this->title;
 
 $model->isNewRecord = true;

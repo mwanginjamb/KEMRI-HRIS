@@ -114,6 +114,7 @@ return [
 
         'OvertimeList' => 'OvertimeList', //50037
         'OvertimeCard' => 'OvertimeCard', //50038
+        'OvertimeLine' => 'OvertimeLine', // 55027
 
         /**************************Medical Cover *************************************/
 
@@ -237,6 +238,9 @@ return [
 
         'SalaryIncrementList' => 'SalaryIncrementList', // 55025
         'SalaryIncrementCard' => 'SalaryIncrementCard', // 55026
+        'ContractChangeLines' => 'ContractChangeLines', //55018
+        'PayrollScales' => 'PayrollScales', //58014
+        'PayrollScalePointers' => 'PayrollScalePointers', //58023
 
         /**********************KEMRI EXMPLOYEE EXIT*********************************************/
 
@@ -286,10 +290,6 @@ return [
         'WorkTicketList' => 'WorkTicketList', // 70005
         'WorkTicketDocument' => 'WorkTicketDocument', //70003
         
-
-
-
-
 
         'Payrollperiods' => 'Payrollperiods', //58002
 

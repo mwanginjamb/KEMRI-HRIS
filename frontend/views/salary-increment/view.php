@@ -9,16 +9,16 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Contract Renewal Card - '.$model->No;
-$this->params['breadcrumbs'][] = ['label' => 'Contract Renewals', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => 'Contract Renewal Card', 'url' => ['view','No'=> $model->No]];
+$this->title = 'Salary Increment Requisition - '.$model->No;
+$this->params['breadcrumbs'][] = ['label' => 'Salary Increment', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Salary Increment Card', 'url' => ['view','No'=> $model->No]];
 
 ?>
 
 <div class="row">
     <div class="col-md-4">
 
-        <?= ($model->Approval_Status == 'New')?Html::a('<i class="fas fa-paper-plane"></i> Send Approval Req',['send-for-approval'],['class' => 'btn btn-app submitforapproval',
+        <?= ($model->Approval_Status== 'New')?Html::a('<i class="fas fa-paper-plane"></i> Send Approval Req',['send-for-approval'],['class' => 'btn btn-app submitforapproval',
             'data' => [
                 'confirm' => 'Are you sure you want to send this document for approval?',
                 'params'=>[
@@ -50,32 +50,38 @@ $this->params['breadcrumbs'][] = ['label' => 'Contract Renewal Card', 'url' => [
         <div class="col-md-12">
             <div class="card-info">
                 <div class="card-header">
-                    <h3>Contract Renewal Document </h3>
+                    <h3>Salary Increment Requisition Document </h3>
                 </div>
             </div>
         </div>
     </div>
+
+<?php
+if(Yii::$app->session->hasFlash('success')){
+    print ' <div class="alert alert-success alert-dismissable">
+                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-check"></i> Success!</h5>
+ ';
+    echo Yii::$app->session->getFlash('success');
+    print '</div>';
+}else if(Yii::$app->session->hasFlash('error')){
+    print ' <div class="alert alert-danger alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-times"></i> Error!</h5>
+                                ';
+    echo Yii::$app->session->getFlash('error');
+    print '</div>';
+}
+?>
 
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
 
-                    <h3 class="card-title">Renewal No : <?= $model->No?></h3>
+                    <h3 class="card-title">Requisition No : <?= $model->No?></h3>
 
-                    <?php
-                    if(Yii::$app->session->hasFlash('success')){
-                        print ' <div class="alert alert-success alert-dismissable">
-                                 ';
-                        echo Yii::$app->session->getFlash('success');
-                        print '</div>';
-                    }else if(Yii::$app->session->hasFlash('error')){
-                        print ' <div class="alert alert-danger alert-dismissable">
-                                 ';
-                        echo Yii::$app->session->getFlash('error');
-                        print '</div>';
-                    }
-                    ?>
+
                 </div>
                 <div class="card-body">
 
@@ -89,14 +95,22 @@ $this->params['breadcrumbs'][] = ['label' => 'Contract Renewal Card', 'url' => [
 
                                 <?= $form->field($model, 'No')->textInput(['readonly' => true]) ?>
                                 <?= $form->field($model, 'Key')->hiddenInput()->label(false) ?>
-                                <?= $form->field($model, 'Employee_No')->textInput(['readonly'=> true,'disabled'=> true]) ?>
+                                <?= $form->field($model, 'Employee_No')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Employee_Name')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Current_Grade')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Current_Pointer')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
 
                             </div>
                             <div class="col-md-6">
 
-                                <?= $form->field($model, 'Employee_Name')->textInput(['readonly' => true, 'disabled' => true]) ?>
-                                <?= $form->field($model, 'Approval_Status')->textInput(['readonly'=> true,'disabled'=> true]) ?>
-                                <?php $form->field($model, 'Approval_Entries')->textInput(['readonly'=> true,'disabled'=> true]) ?>
+                                <?= $form->field($model, 'Current_Salary_Grade')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'New_Grade')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'New_Pointer')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'New_Salary_Grade')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Approval_Entries')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Approval_Status')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+
+                               
 
                             </div>
                         </div>
@@ -117,61 +131,70 @@ $this->params['breadcrumbs'][] = ['label' => 'Contract Renewal Card', 'url' => [
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <?=($model->Approval_Status == 'New')?Html::a('<i class="fa fa-plus-square"></i> Add Line',['contractrenewalline/create','No'=>$model->No],['class' => 'add-line btn btn-outline-info',
+                        <?php ($model->Approval_Status == 'New')?Html::a('<i class="fa fa-plus-square"></i> Add Line',['purchase-requisitionline/create','No'=>$model->No],['class' => 'add-line btn btn-outline-info',
                         ]):'' ?>
                     </div>
                 </div>
 
                 <div class="card-body">
 
-
-
-
-
                     <?php if(is_array($model->lines)){ //show Lines ?>
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <td><b>Contract Code</b></td>
-                                <td><b>Contract_Description</b></td>
-                                <td><b>Contract_Start_Date</b></td>
-                                <td><b>Contract_End_Date</b></td>
-                                <td><b>Contract_Period</b></td>
-                                <td><b>Notice_Period</b></td>
-                                <td><b>Contract_Status</b></td>
-                                <?php if($model->Approval_Status == 'New'): ?><td><b>Actions</b></td> <?php endif; ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <td><b>Contract Code</b></td>
+                                    <td><b>Contract Description</b></td>
+                                    <td><b>Contract Start Date</b></td>
+                                    <td><b>Contract Period</b></td>
+                                    <td><b>Contract End Date</b></td>
+                                    <td><b>Notice Period</b></td>
 
+                                    <td><b>Job Title</b></td>
+                                    <td><b>Line Manager</b></td>
+                                    <td><b>Manager Name</b></td>
+                                    <td><b>Department</b></td>
+                                    <td><b>Pointer</b></td>
+                                    <td><b>Grade</b></td>
+                                    <td><b>Salary</b></td>
+                                    <td><b>New Salary</b></td>
+                                    <td><b>Approval Status</b></td>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            // print '<pre>'; print_r($model->lines); exit;
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                // print '<pre>'; print_r($model->getObjectives()); exit;
 
-                            foreach($model->lines as $obj):
+                                foreach($model->lines as $obj):
 
-                                            if(!empty($obj->Contract_Code)) {
-                                                $updateLink = Html::a('<i class="fa fa-edit"></i>', ['contractrenewalline/update', 'No' => $obj->Line_No], ['class' => 'update-objective btn btn-outline-info btn-xs']);
-                                                $deleteLink = Html::a('<i class="fa fa-trash"></i>', ['contractrenewalline/delete', 'Key' => $obj->Key], ['class' => 'delete btn btn-outline-danger btn-xs']);
-                                                ?>
-                                                <tr>
+                                    ?>
+                                    <tr>
 
-                                                    <td><?= !empty($obj->Contract_Code) ? $obj->Contract_Code : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Contract_Description) ? $obj->Contract_Description : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Contract_Start_Date) ? $obj->Contract_Start_Date : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Contract_End_Date) ? $obj->Contract_End_Date : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Contract_Period) ? $obj->Contract_Period : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Notice_Period) ? $obj->Notice_Period : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Contract_Status) ? $obj->Contract_Status : 'Not Set' ?></td>
-                                                <?php if($model->Approval_Status == 'New'): ?>
-                                                    <td><?= $updateLink . '|' . $deleteLink ?></td>
-                                                <?php endif; ?>
-                                                </tr>
-                                                <?php
-                                            }
-                                     endforeach; ?>
-                            </tbody>
-                        </table>
+                                        <td><?= !empty($obj->Contract_Code)?$obj->Contract_Code:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Contract_Description)?$obj->Contract_Description:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Contract_Start_Date)?$obj->Contract_Start_Date:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Contract_Period)?$obj->Contract_Period:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Contract_End_Date)?$obj->Contract_End_Date:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Notice_Period)?$obj->Notice_Period:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Job_Title)?$obj->Job_Title:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Line_Manager)?$obj->Line_Manager:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Manager_Name)?$obj->Manager_Name:'Not Set' ?></td>
+
+                                        <td><?= !empty($obj->Department)?$obj->Department:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Pointer)?$obj->Pointer:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Grade)?$obj->Grade:'Not Set' ?></td>
+
+                                        <td><?= !empty($obj->Salary)?$obj->Salary:'Not Set' ?></td>
+                                        <td><?= !empty($obj->New_Salary)?$obj->New_Salary:'Not Set' ?></td>
+                                        <td><?= !empty($obj->Approval_Status)?$obj->Approval_Status:'Not Set' ?></td>
+
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+
                     <?php } ?>
                 </div>
             </div>
@@ -189,7 +212,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Contract Renewal Card', 'url' => [
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel" style="position: absolute">Contract Renewal</h4>
+                    <h4 class="modal-title" id="myModalLabel" style="position: absolute">Store Requisitions</h4>
                 </div>
                 <div class="modal-body">
 
@@ -426,6 +449,17 @@ $style = <<<CSS
         font-weight: bold;
     }
 
+    tbody {
+      display: inline-block;
+      overflow-y:auto;
+    }
+    thead, tbody tr {
+      display:table;
+      width: 100%;
+      table-layout:fixed;
+    }
+
+
     table td:nth-child(11), td:nth-child(12) {
                 text-align: center;
     }
@@ -433,26 +467,26 @@ $style = <<<CSS
     /* Table Media Queries */
     
      @media (max-width: 500px) {
-          table td:nth-child(7) {
+          table td:nth-child(2),td:nth-child(3),td:nth-child(6),td:nth-child(7),td:nth-child(8),td:nth-child(9),td:nth-child(10), td:nth-child(11) {
                 display: none;
         }
     }
     
      @media (max-width: 550px) {
-          table td:nth-child(7) {
+          table td:nth-child(2),td:nth-child(6),td:nth-child(7),td:nth-child(8),td:nth-child(9),td:nth-child(10), td:nth-child(11) {
                 display: none;
         }
     }
     
     @media (max-width: 650px) {
-          table td:nth-child(7) {
+          table td:nth-child(2),td:nth-child(6),td:nth-child(7),td:nth-child(8),td:nth-child(9),td:nth-child(10), td:nth-child(11) {
                 display: none;
         }
     }
 
 
     @media (max-width: 1500px) {
-          table td:nth-child(7) {
+          table td:nth-child(2),td:nth-child(7),td:nth-child(8),td:nth-child(9),td:nth-child(10), td:nth-child(11) {
                 display: none;
         }
     }
