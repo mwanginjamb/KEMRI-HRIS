@@ -22,12 +22,14 @@ $absoluteUrl = \yii\helpers\Url::home(true);
                     $form = ActiveForm::begin(); ?>
                 <div class="row">
 
-
                             <div class="col-md-12">
-                                    <?= $form->field($model, 'Request_No')->hiddenInput(['readonly' => true])->label(false) ?>
+                                    <?= $form->field($model, 'Line_No')->hiddenInput(['readonly' => true])->label(false) ?>
                                     <?= $form->field($model, 'Contract_Code')->dropDownList($contracts, ['prompt' => 'Select Contract Type...']) ?>
                                     <?= $form->field($model, 'Contract_Start_Date')->textInput(['type' => 'date']) ?>
-                                    <?= $form->field($model, 'Contract_End_Date')->textInput(['type' => 'date']) ?>
+                                    <?= $form->field($model, 'Contract_Period')->textInput(['maxlength' => '3']) ?>
+                                    <?= $form->field($model, 'Contract_End_Date')->textInput(['readonly' => true, 'disabled' => true]) ?>
+                                    <?= $form->field($model, 'Employee_No')->hiddenInput(['readonly' => true])->label(false) ?>
+                                    <?= $form->field($model, 'Change_No')->hiddenInput(['readonly' => true])->label(false) ?>
                                     <?= $form->field($model, 'Key')->hiddenInput(['readonly'=> true])->label(false) ?>
                                     <?= $form->field($model, 'Line_No')->hiddenInput(['readonly'=> true])->label(false) ?>
                             </div>
@@ -62,60 +64,99 @@ $script = <<<JS
                 },'json');
         });
 
-         $('#storerequisitionline-no').on('change', function(e){
+         $('#contractrenewalline-contract_code').on('change', function(e){
             e.preventDefault();
                   
-            const No = e.target.value;
-            const Line_No = $('#storerequisitionline-line_no').val();
+            const Contract_Code = e.target.value;
+            const Line_No = $('#contractrenewalline-line_no').val();
             
             
-            const url = $('input[name="absolute"]').val()+'storerequisitionline/setitem';
-            $.post(url,{'No': No,'Line_No': Line_No}).done(function(msg){
+            const url = $('input[name="absolute"]').val()+'contractrenewalline/setfield?field='+'Contract_Code';
+            $.post(url,{'Contract_Code': Contract_Code,'Line_No': Line_No}).done(function(msg){
                    //populate empty form fields with new data
                     console.log(typeof msg);
                     console.table(msg);
                     if((typeof msg) === 'string') { // A string is an error
-                        const parent = document.querySelector('.field-storerequisitionline-no');
+                        const parent = document.querySelector('.field-contractrenewalline-contract_code');
                         const helpbBlock = parent.children[2];
                         helpbBlock.innerText = msg;
                         disableSubmit();
                     }else{ // An object represents correct details
-                        const parent = document.querySelector('.field-storerequisitionline-no');
+                        const parent = document.querySelector('.field-contractrenewalline-contract_code');
                         const helpbBlock = parent.children[2];
                         helpbBlock.innerText = ''; 
                         enableSubmit();
                     }
-                    $('#storerequisitionline-key').val(msg.Key);
-                    $('#storerequisitionline-available_quantity').val(msg.Available_Quantity);
+                    $('#contractrenewalline-key').val(msg.Key);
+                    
                    
                     
                 },'json');
         });
          
-         $('#storerequisitionline-quantity').on('change', function(e){
+         // Set Contract start date
+         
+         $('#contractrenewalline-contract_start_date').on('change', function(e){
             e.preventDefault();
                   
-            const Line_No = $('#storerequisitionline-line_no').val();
+            const Contract_Start_Date = e.target.value;
+            const Line_No = $('#contractrenewalline-line_no').val();
             
             
-            const url = $('input[name="absolute"]').val()+'storerequisitionline/setquantity';
-            $.post(url,{'Line_No': Line_No,'Quantity': $(this).val()}).done(function(msg){
+            const url = $('input[name="absolute"]').val()+'contractrenewalline/setfield?field='+'Contract_Start_Date';
+            $.post(url,{'Contract_Start_Date': Contract_Start_Date,'Line_No': Line_No}).done(function(msg){
                    //populate empty form fields with new data
                     console.log(typeof msg);
                     console.table(msg);
-                    if((typeof msg) === 'string'){ // A string is an error
-                        const parent = document.querySelector('.field-storerequisitionline-quantity');
+                    if((typeof msg) === 'string') { // A string is an error
+                        const parent = document.querySelector('.field-contractrenewalline-contract_start_date');
                         const helpbBlock = parent.children[2];
                         helpbBlock.innerText = msg;
                         disableSubmit();
                     }else{ // An object represents correct details
-                        const parent = document.querySelector('.field-storerequisitionline-quantity');
+                        const parent = document.querySelector('.field-contractrenewalline-contract_start_date');
                         const helpbBlock = parent.children[2];
                         helpbBlock.innerText = ''; 
                         enableSubmit();
                     }
-                    $('#storerequisitionline-key').val(msg.Key);
-                                        
+                    $('#contractrenewalline-key').val(msg.Key);
+                    
+                   
+                    
+                },'json');
+        });
+         
+         // set contract Period
+         
+         
+         $('#contractrenewalline-contract_period').on('change', function(e){
+            e.preventDefault();
+                  
+            const Contract_Period = e.target.value;
+            const Line_No = $('#contractrenewalline-line_no').val();
+            
+            
+            const url = $('input[name="absolute"]').val()+'contractrenewalline/setfield?field='+'Contract_Period';
+            $.post(url,{'Contract_Period': Contract_Period,'Line_No': Line_No}).done(function(msg){
+                   //populate empty form fields with new data
+                    console.log(typeof msg);
+                    console.table(msg);
+                    if((typeof msg) === 'string') { // A string is an error
+                        const parent = document.querySelector('.field-contractrenewalline-contract_period');
+                        const helpbBlock = parent.children[2];
+                        helpbBlock.innerText = msg;
+                        disableSubmit();
+                    }else{ // An object represents correct details
+                        const parent = document.querySelector('.field-contractrenewalline-contract_period');
+                        const helpbBlock = parent.children[2];
+                        helpbBlock.innerText = ''; 
+                        enableSubmit();
+                    }
+                    $('#contractrenewalline-key').val(msg.Key);
+                    $('#contractrenewalline-contract_end_date').val(msg.Contract_End_Date);
+                    
+                   
+                    
                 },'json');
         });
          

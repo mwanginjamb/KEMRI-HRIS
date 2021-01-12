@@ -361,6 +361,24 @@ class ExitFormController extends Controller
         ]);
     }
 
+    // Get clearance status
+
+    public function actionClearanceStatus($form_no){
+        $model = new ExitForm();
+        $service = Yii::$app->params['ServiceName']['ClearanceStatus'];
+
+        $filter = [
+            'Form_No' => $form_no
+        ];
+
+        $result = Yii::$app->navhelper->getData($service, $filter);
+
+        return $this->render('clearance_status',[
+            'model' => $result,
+        ]);
+    }
+
+
    // Get Vehicle Requisition list
 
     public function actionList(){
@@ -377,7 +395,8 @@ class ExitFormController extends Controller
             {
                 $link = $updateLink = $deleteLink =  '';
                 $Viewlink = Html::a('<i class="fas fa-eye"></i>',['view','No'=> $item->Form_No ],['class'=>'btn btn-outline-primary btn-xs','title' => 'View Request.' ]);
-                
+                $Statuslink = Html::a('<i class="fas fa-envelope-open"></i>',['clearance-status','form_no'=> $item->Form_No ],['class'=>'btn btn-outline-success btn-xs','title' => 'View Clearance Status.' ]);
+
 
                 $result['data'][] = [
                     'Key' => $item->Key,
@@ -386,7 +405,7 @@ class ExitFormController extends Controller
                     'Employee_No' => !empty($item->Employee_No)?$item->Employee_No:'',
                     'Employee_Name' => !empty($item->Employee_Name)?$item->Employee_Name:'',
                 
-                    'Action' => $link.' '. $updateLink.' '.$Viewlink ,
+                    'Action' => $link.' '. $updateLink.' '.$Viewlink.' '.$Statuslink ,
 
                 ];
             }

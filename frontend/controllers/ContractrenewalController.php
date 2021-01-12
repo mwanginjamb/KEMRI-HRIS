@@ -73,7 +73,7 @@ class ContractrenewalController extends Controller
 
         /*Do initial request */
         if(!isset(Yii::$app->request->post()['Contractrenewal'])){
-            $model->Employee_No = Yii::$app->user->identity->Employee_No;
+           // $model->Employee_No = Yii::$app->user->identity->Employee_No;
             $request = Yii::$app->navhelper->postData($service, $model);
             if(!is_string($request) )
             {

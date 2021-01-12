@@ -30,6 +30,8 @@ public $Salary;
 public $New_Salary;
 public $Status;
 public $Change_No;
+public $Line_No;
+public $Employee_No;
 public $isNewRecord;
 
     public function rules()

@@ -21,33 +21,85 @@ Yii::$app->session->set('isSupervisor',false);*/
 ?>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
 
-        <?php ($model->Action_ID == 'New')?Html::a('<i class="fas fa-paper-plane"></i> Send Approval Req',['send-for-approval'],['class' => 'btn btn-app submitforapproval',
+
+
+
+        <?= Html::a('<i class="fas fa-paper-plane"></i> Send to Library',['cancel-request'],['class' =>  $model->CheckStatus('Library').' btn btn-app submitforapproval',
             'data' => [
-                'confirm' => 'Are you sure you want to send this document for approval?',
+                'confirm' => 'Are you sure you want to send this document ?',
                 'params'=>[
                     'No'=> $model->Form_No,
-                    'employeeNo' => Yii::$app->user->identity->{'Employee No_'},
                 ],
                 'method' => 'get',
-        ],
-            'title' => 'Send Request for Approval'
-
-        ]):'' ?>
-
-
-        <?php ($model->Action_ID == 'Pending_Approval')?Html::a('<i class="fas fa-times"></i> Cancel Approval Req.',['cancel-request'],['class' => 'btn btn-app submitforapproval',
-            'data' => [
-            'confirm' => 'Are you sure you want to cancel imprest approval request?',
-            'params'=>[
-                'No'=> $model->Form_No,
             ],
-            'method' => 'get',
-        ],
             'title' => 'Cancel Approval Request'
 
-        ]):'' ?>
+        ]) ?>
+
+        <?= Html::a('<i class="fas fa-paper-plane"></i> Send to Lab',['cancel-request'],['class' => $model->CheckStatus('Lab').' btn btn-app submitforapproval',
+            'data' => [
+                'confirm' => 'Are you sure you want to send this document ?',
+                'params'=>[
+                    'No'=> $model->Form_No,
+                ],
+                'method' => 'get',
+            ],
+            'title' => 'Cancel Approval Request'
+
+        ]) ?>
+
+
+        <?= Html::a('<i class="fas fa-paper-plane"></i> Send to ICT',['cancel-request'],['class' => $model->CheckStatus('ICT').' btn btn-app submitforapproval',
+            'data' => [
+                'confirm' => 'Are you sure you want to send this document ?',
+                'params'=>[
+                    'No'=> $model->Form_No,
+                ],
+                'method' => 'get',
+            ],
+            'title' => 'Cancel Approval Request'
+
+        ]) ?>
+
+        <?= Html::a('<i class="fas fa-paper-plane"></i> Send to Store',['cancel-request'],['class' => $model->CheckStatus('Store').' btn btn-app submitforapproval',
+            'data' => [
+                'confirm' => 'Are you sure you want to send this document ?',
+                'params'=>[
+                    'No'=> $model->Form_No,
+                ],
+                'method' => 'get',
+            ],
+            'title' => 'Cancel Approval Request'
+
+        ]) ?>
+
+        <?= Html::a('<i class="fas fa-paper-plane"></i> Send to Archives',['cancel-request'],['class' => $model->CheckStatus('Archives').' btn btn-app submitforapproval',
+            'data' => [
+                'confirm' => 'Are you sure you want to send this document ?',
+                'params'=>[
+                    'No'=> $model->Form_No,
+                ],
+                'method' => 'get',
+            ],
+            'title' => 'Cancel Approval Request'
+
+        ]) ?>
+
+        <?= Html::a('<i class="fas fa-paper-plane"></i> Send to Assets',['cancel-request'],['class' => $model->CheckStatus('Assets').' btn btn-app submitforapproval',
+            'data' => [
+                'confirm' => 'Are you sure you want to send this document ?',
+                'params'=>[
+                    'No'=> $model->Form_No,
+                ],
+                'method' => 'get',
+            ],
+            'title' => 'Cancel Approval Request'
+
+        ]) ?>
+
+
     </div>
 </div>
 
@@ -74,6 +126,9 @@ Yii::$app->session->set('isSupervisor',false);*/
 
                     <h3 class="card-title">Request No : <?= $model->Form_No?></h3>
 
+                    <div class="card-tools">
+                        <?= Html::a('View Clearance Status',['clearance-status','form_no' => $model->Form_No],['class' => 'btn btn-sm btn-success']);?>
+                    </div>
 
 
                     <?php

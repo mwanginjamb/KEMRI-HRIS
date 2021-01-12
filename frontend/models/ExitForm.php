@@ -141,6 +141,86 @@ public $isNewRecord;
         return ArrayHelper::map($changes,'Code','Desc');
     }
 
+    // Check section clearance Status
+
+    public function CheckStatus($section)
+    {
+        $service = Yii::$app->params['ServiceName']['ClearanceStatus'];
+
+        if($section == 'Lab')
+        {
+            $filter = [
+                'Form_No' => $this->Form_No,
+                'Section' => $section,
+            ];
+            //Get Status
+            $result = Yii::$app->navhelper->getData($service, $filter);
+            return $result[0]->Status;
+        }
+        elseif($section == 'ICT')
+        {
+            $filter = [
+                'Form_No' => $this->Form_No,
+                'Section' => $section,
+            ];
+            //Get Status
+            $result = Yii::$app->navhelper->getData($service, $filter);
+            return $result[0]->Status == 'Cleared'?'text-success':'';
+        }
+        elseif($section == 'Store')
+        {
+            $filter = [
+                'Form_No' => $this->Form_No,
+                'Section' => $section,
+            ];
+            //Get Status
+            $result = Yii::$app->navhelper->getData($service, $filter);
+            return $result[0]->Status == 'Cleared'?'text-success':'';
+        }
+        elseif($section == 'Library')
+        {
+            $filter = [
+                'Form_No' => $this->Form_No,
+                'Section' => $section,
+            ];
+            //Get Status
+            $result = Yii::$app->navhelper->getData($service, $filter);
+            return $result[0]->Status == 'Cleared'?'text-success':'';
+        }
+        elseif($section == 'Archives')
+        {
+            $filter = [
+                'Form_No' => $this->Form_No,
+                'Section' => $section,
+            ];
+            //Get Status
+
+            $result = Yii::$app->navhelper->getData($service, $filter);
+            if(is_array($result)){
+                return $result[0]->Status == 'Cleared'?'text-success':'';
+            }else{
+                return false;
+            }
+
+        }
+        elseif($section == 'Assets')
+        {
+            $filter = [
+                'Form_No' => $this->Form_No,
+                'Section' => $section,
+            ];
+            //Get Status
+            $result = Yii::$app->navhelper->getData($service, $filter);
+            if(is_array($result)){
+                return $result[0]->Status == 'Cleared'?'text-success':'';
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
 
 
 }

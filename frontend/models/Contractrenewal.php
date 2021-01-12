@@ -21,6 +21,7 @@ public $Employee_No;
 public $Employee_Name;
 public $Approval_Entries;
 public $Approval_Status;
+public $isNewRecord;
 
 
 

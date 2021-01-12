@@ -129,49 +129,71 @@ $this->params['breadcrumbs'][] = ['label' => 'Contract Renewal Card', 'url' => [
 
 
                     <?php if(is_array($model->lines)){ //show Lines ?>
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <td><b>Contract Code</b></td>
-                                <td><b>Contract_Description</b></td>
-                                <td><b>Contract_Start_Date</b></td>
-                                <td><b>Contract_End_Date</b></td>
-                                <td><b>Contract_Period</b></td>
-                                <td><b>Notice_Period</b></td>
-                                <td><b>Contract_Status</b></td>
-                                <?php if($model->Approval_Status == 'New'): ?><td><b>Actions</b></td> <?php endif; ?>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <td><b>Contract Code</b></td>
+                                    <td><b>Contract Description</b></td>
+                                    <td><b>Contract Start_Date</b></td>
+                                    <td><b>Contract Period</b></td>
+                                    <td><b>Contract End Date</b></td>
+                                    <td><b>Notice Period</b></td>
+                                    <td><b>Job Title</b></td>
+                                    <td><b>Line Manager</b></td>
+                                    <td><b>Manager Name</b></td>
+                                    <td><b>Department</b></td>
+                                    <td><b>Pointer</b></td>
+                                    <td><b>Grade</b></td>
+                                    <td><b>Salary</b></td>
+                                    <td><b>New Salary</b></td>
+                                    <td><b>Status</b></td>
+
+                                    <?php if($model->Approval_Status == 'New'): ?><td><b>Actions</b></td> <?php endif; ?>
 
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            // print '<pre>'; print_r($model->lines); exit;
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                // print '<pre>'; print_r($model->lines); exit;
 
-                            foreach($model->lines as $obj):
+                                foreach($model->lines as $obj):
 
-                                            if(!empty($obj->Contract_Code)) {
-                                                $updateLink = Html::a('<i class="fa fa-edit"></i>', ['contractrenewalline/update', 'No' => $obj->Line_No], ['class' => 'update-objective btn btn-outline-info btn-xs']);
-                                                $deleteLink = Html::a('<i class="fa fa-trash"></i>', ['contractrenewalline/delete', 'Key' => $obj->Key], ['class' => 'delete btn btn-outline-danger btn-xs']);
-                                                ?>
-                                                <tr>
+                                    if(!empty($obj->Contract_Code)) {
+                                        $updateLink = Html::a('<i class="fa fa-edit"></i>', ['contractrenewalline/update', 'No' => $obj->Line_No], ['class' => 'update-objective btn btn-outline-info btn-xs']);
+                                        $deleteLink = Html::a('<i class="fa fa-trash"></i>', ['contractrenewalline/delete', 'Key' => $obj->Key], ['class' => 'delete btn btn-outline-danger btn-xs']);
+                                        ?>
+                                        <tr>
 
-                                                    <td><?= !empty($obj->Contract_Code) ? $obj->Contract_Code : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Contract_Description) ? $obj->Contract_Description : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Contract_Start_Date) ? $obj->Contract_Start_Date : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Contract_End_Date) ? $obj->Contract_End_Date : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Contract_Period) ? $obj->Contract_Period : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Notice_Period) ? $obj->Notice_Period : 'Not Set' ?></td>
-                                                    <td><?= !empty($obj->Contract_Status) ? $obj->Contract_Status : 'Not Set' ?></td>
-                                                <?php if($model->Approval_Status == 'New'): ?>
-                                                    <td><?= $updateLink . '|' . $deleteLink ?></td>
-                                                <?php endif; ?>
-                                                </tr>
-                                                <?php
-                                            }
-                                     endforeach; ?>
-                            </tbody>
-                        </table>
+                                            <td><?= !empty($obj->Contract_Code) ? $obj->Contract_Code : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Contract_Description) ? $obj->Contract_Description : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Contract_Start_Date) ? $obj->Contract_Start_Date : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Contract_Period) ? $obj->Contract_Period : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Contract_End_Date) ? $obj->Contract_End_Date : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Notice_Period) ? $obj->Notice_Period : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Job_Title) ? $obj->Job_Title : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Line_Manager) ? $obj->Line_Manager : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Manager_Name) ? $obj->Manager_Name : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Department) ? $obj->Department : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Pointer) ? $obj->Pointer : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Grade) ? $obj->Grade : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Salary) ? $obj->Salary : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->New_Salary) ? $obj->New_Salary : 'Not Set' ?></td>
+                                            <td><?= !empty($obj->Status) ? $obj->Status : 'Not Set' ?></td>
+
+                                            <?php if($model->Approval_Status == 'New'): ?>
+                                                <td><?= $updateLink . '|' . $deleteLink ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <?php
+                                    }
+                                endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+
                     <?php } ?>
                 </div>
             </div>

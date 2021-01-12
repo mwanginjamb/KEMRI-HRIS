@@ -56,7 +56,7 @@ class ContractrenewallineController extends Controller
             ],
             'contentNegotiator' =>[
                 'class' => ContentNegotiator::class,
-                'only' => ['setquantity','setitem','setlocation'],
+                'only' => ['setquantity','setitem','setlocation','setfield'],
                 'formatParam' => '_format',
                 'formats' => [
                     'application/json' => Response::FORMAT_JSON,
@@ -78,7 +78,9 @@ class ContractrenewallineController extends Controller
 
         if(Yii::$app->request->get('No') && !isset(Yii::$app->request->post()['Contractrenewalline'])){
 
-                $model->Request_No = $No;
+                $model->Change_No = $No;
+                $model->Contract_Start_Date = date('Y-m-d');
+                $model->Employee_No = Yii::$app->user->identity->{'Employee No_'};
                 $result = Yii::$app->navhelper->postData($service, $model);
 
 
@@ -88,19 +90,17 @@ class ContractrenewallineController extends Controller
 
         if(Yii::$app->request->post() && Yii::$app->navhelper->loadpost(Yii::$app->request->post()['Contractrenewalline'],$model) ){
 
-            $filter = [
-                'Request_No' => $model->Request_No,
-            ];
+
 
             $result = Yii::$app->navhelper->updateData($service,$model);
 
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             if(!is_string($result)){
 
-                return ['note' => '<div class="alert alert-success">Requisition Line Created Successfully. </div>' ];
+                return ['note' => '<div class="alert alert-success">Line Added Successfully. </div>' ];
             }else{
 
-                return ['note' => '<div class="alert alert-danger">Error Creating Requisition Line: '.$result.'</div>'];
+                return ['note' => '<div class="alert alert-danger">Error Adding Line: '.$result.'</div>'];
             }
 
         }
@@ -180,9 +180,9 @@ class ContractrenewallineController extends Controller
         }
     }
 
-    public function actionSetquantity(){
+    public function actionSetfield($field){
         $model = new Contractrenewalline();
-        $service = Yii::$app->params['ServiceName']['StoreRequisitionLine'];
+        $service = Yii::$app->params['ServiceName']['ContractRenewalLines'];
 
         $filter = [
             'Line_No' => Yii::$app->request->post('Line_No')
@@ -192,7 +192,7 @@ class ContractrenewallineController extends Controller
         if(is_array($line)){
             Yii::$app->navhelper->loadmodel($line[0],$model);
             $model->Key = $line[0]->Key;
-            $model->Quantity = Yii::$app->request->post('Quantity');
+            $model->$field = Yii::$app->request->post($field);
 
         }
 

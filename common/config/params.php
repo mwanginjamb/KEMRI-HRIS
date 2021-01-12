@@ -255,6 +255,7 @@ return [
         'ICTClearanceLines' => 'ICTClearanceLines', //52030
         'StoreCLearanceForm' => 'StoreCLearanceForm', //52031
         'AssignedAssetsClearance' => 'AssignedAssetsClearance', //52033
+        'ClearanceStatus' => 'ClearanceStatus', // 52035
         'EmployeeExitManagement' => 'EmployeeExitManagement', //50233 - CodeUnit--------------
 
 

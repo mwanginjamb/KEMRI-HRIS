@@ -48,6 +48,19 @@ Yii::$app->session->set('isSupervisor',false);*/
             'title' => 'Cancel Approval Request'
 
         ]):'' ?>
+
+
+        <?= Html::a('<i class="fas fa-file"></i> Generate Exit Form',['gen-exit-form'],['class' => 'btn btn-app',
+            'data' => [
+                'confirm' => 'Are you sure you want to Generate Exit Form ?',
+                'params'=>[
+                    'No'=> $model->Exit_No,
+                ],
+                'method' => 'get',
+            ],
+            'title' => 'Cancel Approval Request'
+
+        ]) ?>
     </div>
 </div>
 
@@ -134,7 +147,7 @@ Yii::$app->session->set('isSupervisor',false);*/
                                 <?= $form->field($model, 'Date_Of_Notice')->textInput(['readonly'=> true,'disabled'=> true]) ?>
                                 <?= $form->field($model, 'Expiry_of_Notice')->textInput(['readonly'=> true,'disabled'=> true]) ?>
                                 <?= $form->field($model, 'Date_of_Exit_Interview')->textInput(['readonly'=> true,'disabled'=> true]) ?>
-                                <?= $form->field($model, 'Notice_Fully_Served')->textInput(['readonly'=> true,'disabled'=> true]) ?>
+                                <?= $form->field($model, 'Notice_Fully_Served')->checkbox(['readonly'=> true,'disabled'=> true]) ?>
                                 <?= $form->field($model, 'Reasons_For_Not_Serving_Notice')->textInput(['readonly'=> true,'disabled'=> true]) ?>
 
                             </div>

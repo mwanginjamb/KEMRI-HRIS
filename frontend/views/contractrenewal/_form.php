@@ -63,7 +63,6 @@ $absoluteUrl = \yii\helpers\Url::home(true);
                         <div class="col-md-6">
                             <?= $form->field($model, 'Employee_Name')->textInput(['readonly' => true, 'disabled' => true]) ?>
                             <?= $form->field($model, 'Approval_Status')->textInput(['readonly'=> true,'disabled'=> true]) ?>
-                            <?= $form->field($model, 'Status')->textInput(['readonly'=> true,'disabled'=> true]) ?>
 
 
                         </div>

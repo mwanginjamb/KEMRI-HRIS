@@ -12,7 +12,7 @@
 
 $this->title = Yii::$app->params['generalTitle'];
 $this->params['breadcrumbs'][] = ['label' => 'Exit Form List', 'url' => ['index']];
-$this->params['breadcrumbs'][] = '';
+$this->params['breadcrumbs'][] = ['label' => 'Clearance Status', 'url' => ['clearance_status']];
 $url = \yii\helpers\Url::home(true);
 ?>
 <!--<div class="row">
@@ -50,12 +50,39 @@ if(Yii::$app->session->hasFlash('success')){
     <div class="col-md-12">
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">Exit Form List</h3>
+                <h3 class="card-title">Clearance Status</h3>
 
             </div>
             <div class="card-body">
-                <table class="table table-bordered dt-responsive table-hover" id="table">
-                </table>
+                <div class="responsive-table">
+                    <table class="table table-bordered dt-responsive table-hover">
+                        <thead>
+                            <tr>
+                                <td>Exit No</td>
+                                <td>Form_No</td>
+                                <td>Employee_No</td>
+                                <td>Clearing_Employee</td>
+                                <td>Section</td>
+                                <td>Status</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($model as $status):
+                                $cleared = ($status->Status == 'Cleared')?'text-success text-bold':'';
+                                ?>
+                                    <tr class="<?= $cleared ?>">
+                                        <td><?= $status->Exit_No  ?></td>
+                                        <td><?= $status->Form_No ?></td>
+                                        <td><?= $status->Employee_No ?></td>
+                                        <td><?= $status->Clearing_Employee ?></td>
+                                        <td><?= $status->Section ?></td>
+                                        <td ><?= $status->Status ?></td>
+                                    </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
