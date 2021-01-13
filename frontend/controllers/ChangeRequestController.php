@@ -98,7 +98,7 @@ class ChangeRequestController extends Controller
 
         /*Do initial request */
         if(!isset(Yii::$app->request->post()['Changerequest'])){
-            $model->Employee_No = Yii::$app->user->identity->{'Employee_No'};
+            $model->Employee_No = Yii::$app->user->identity->{'Employee No_'};
             $request = Yii::$app->navhelper->postData($service, $model);
             if(!is_string($request) )
             {
@@ -111,10 +111,10 @@ class ChangeRequestController extends Controller
             }
         }
 
-        if(Yii::$app->request->post() && Yii::$app->navhelper->loadpost(Yii::$app->request->post()['Vehiclerequisition'],$model) ){
+        if(Yii::$app->request->post() && Yii::$app->navhelper->loadpost(Yii::$app->request->post()['Changerequest'],$model) ){
 
             $filter = [
-                'Booking_Requisition_No' => $model->Booking_Requisition_No,
+                'No' => $model->No,
             ];
             /*Read the card again to refresh Key in case it changed*/
             $refresh = Yii::$app->navhelper->getData($service,$filter);
@@ -123,7 +123,7 @@ class ChangeRequestController extends Controller
             if(!is_string($result)){
 
                 Yii::$app->session->setFlash('success','Request Created Successfully.' );
-                return $this->redirect(['view','No' => $result->Booking_Requisition_No]);
+                return $this->redirect(['view','No' => $result->No,'Change' => $result->Nature_of_Change]);
 
             }else{
                 Yii::$app->session->setFlash('error','Error Creating Request '.$result );
@@ -150,7 +150,7 @@ class ChangeRequestController extends Controller
         $model->isNewRecord = false;
 
         $filter = [
-            'Booking_Requisition_No' => $No,
+            'No' => $No,
         ];
         $result = Yii::$app->navhelper->getData($service,$filter);
 
@@ -375,28 +375,24 @@ class ChangeRequestController extends Controller
 
 
 
-    public function actionSetloantype(){
-        $model = new Salaryadvance();
-        $service = Yii::$app->params['ServiceName']['SalaryAdvanceCard'];
+    public function actionSetchange(){
+        $model = new Changerequest();
+        $service = Yii::$app->params['ServiceName']['ChangeRequestCard'];
 
         $filter = [
-            'Plan_No' => Yii::$app->request->post('Plan_No')
+            'No' => Yii::$app->request->post('No')
         ];
         $request = Yii::$app->navhelper->getData($service, $filter);
 
         if(is_array($request)){
             Yii::$app->navhelper->loadmodel($request[0],$model);
             $model->Key = $request[0]->Key;
-            $model->Loan_Type = Yii::$app->request->post('loan');
+            $model->Nature_of_Change = Yii::$app->request->post('Nature_of_Change');
         }
 
-
         $result = Yii::$app->navhelper->updateData($service,$model);
-
         Yii::$app->response->format = \yii\web\response::FORMAT_JSON;
-
         return $result;
-
     }
 
     public function actionCommit(){

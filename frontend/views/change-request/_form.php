@@ -51,11 +51,9 @@ $absoluteUrl = \yii\helpers\Url::home(true);
 
                         <div class="col-md-6">
 
-                            <?= $form->field($model, 'Booking_Requisition_No')->textInput() ?>
-                            <?= $form->field($model, 'Key')->hiddenInput()->label(false) ?>
-                            <?= $form->field($model, 'Requisition_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                            <?= $form->field($model, 'Reason_For_Booking')->textInput(['maxlength'=> 250, 'required'=>true]) ?>
-                            <?= $form->field($model, 'Requested_By')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                            <?= $form->field($model, 'No')->textInput(['readonly'=> true]) ?>
+                            <?= $form->field($model, 'Nature_of_Change')->dropDownList($model->changes,['prompt' => 'Select ...']) ?>
+                            <?= $form->field($model, 'Key')->hiddenInput(['readonly'=> true])->label(false) ?>
 
 
 
@@ -63,10 +61,9 @@ $absoluteUrl = \yii\helpers\Url::home(true);
                         </div>
 
                         <div class="col-md-6">
-                            <?= $form->field($model, 'Department')->textInput(['readonly'=> true,'disabled'=> true]) ?>
-                            <?= $form->field($model, 'Booking_Requisition_Status')->textInput(['readonly'=> true,'disabled'=> true]) ?>
-                            <?= $form->field($model, 'Booked_Status')->textInput(['readonly'=> true,'disabled'=> true]) ?>
-                            <?= $form->field($model, 'Booking_Requisition_Status')->textInput(['readonly'=> true,'disabled'=> true]) ?>
+                            <?= $form->field($model, 'Employee_No')->textInput(['readonly'=> true,'disabled'=> true]) ?>
+                            <?= $form->field($model, 'Employee_Name')->textInput(['readonly'=> true,'disabled'=> true]) ?>
+                            <?= $form->field($model, 'Approval_Entries')->textInput(['readonly'=> true,'disabled'=> true]) ?>
 
                         </div>
 
@@ -147,27 +144,26 @@ $script = <<<JS
                 },'json');
         });*/
 
-        // Set other Employee
+        // Set Nature of Change
         
-     $('#salaryadvance-loan_type').change(function(e){
-        const loan = e.target.value;
-        const No = $('#salaryadvance-no').val();
+     $('#changerequest-nature_of_change').change(function(e){
+        const Nature_of_Change = e.target.value;
+        const No = $('#changerequest-no').val();
         if(No.length){
-            const url = $('input[name=url]').val()+'salaryadvance/setloantype';
-            $.post(url,{'loan': loan,'No': No}).done(function(msg){
+            const url = $('input[name=url]').val()+'change-request/setchange';
+            $.post(url,{'Nature_of_Change': Nature_of_Change,'No': No}).done(function(msg){
                    //populate empty form fields with new data
-                   
-                   $('#salaryadvance-repayment_period').val(msg.Repayment_Period);
-                   $('#salaryadvance-key').val(msg.Key);
+                  
+                   $('#changerequest-key').val(msg.Key);
                     console.log(typeof msg);
                     console.table(msg);
                     if((typeof msg) === 'string') { // A string is an error
-                        const parent = document.querySelector('.field-imprestcard-employee_no');
+                        const parent = document.querySelector('.field-changerequest-nature_of_change');
                         const helpbBlock = parent.children[2];
                         helpbBlock.innerText = msg;
                         
                     }else{ // An object represents correct details
-                        const parent = document.querySelector('.field-imprestcard-employee_no');
+                        const parent = document.querySelector('.field-changerequest-nature_of_change');
                         const helpbBlock = parent.children[2];
                         helpbBlock.innerText = ''; 
                         

@@ -151,6 +151,8 @@ Yii::$app->session->set('isSupervisor',false);*/
                 </div>
             </div><!--end details card-->
 
+
+             <?php if( (Yii::$app->request->get('Change') == 'Medical_Dependants')){ ?>
             <!--Medical Dependants -->
 
             <div class="card" id="Medical_Dependants">
@@ -212,7 +214,7 @@ Yii::$app->session->set('isSupervisor',false);*/
 
             <!--End Dependants Lines -->
 
-
+            <?php }elseif( (Yii::$app->request->get('Change') == 'Next_Of_Kin')){ ?>
             <!--Next of Keen-->
 
             <div class="card" id="Next_Of_Kin">
@@ -277,6 +279,8 @@ Yii::$app->session->set('isSupervisor',false);*/
             </div>
 
             <!--Beneficiaries-->
+
+            <?php }elseif( (Yii::$app->request->get('Change') == 'Beneficiaries')){ ?>
 
             <div class="card" id="Employee_Beneficiaries_Change">
                 <div class="card-header">
@@ -346,8 +350,10 @@ Yii::$app->session->set('isSupervisor',false);*/
                 </div>
             </div>
 
+            <?php }elseif( (Yii::$app->request->get('Change') == 'Work_History') ){ ?>
 
             <!--Work History Change-->
+
 
             <div class="card" id="Employee_Work_History_Change">
                 <div class="card-header">
@@ -409,7 +415,7 @@ Yii::$app->session->set('isSupervisor',false);*/
                 </div>
             </div>
 
-
+            <?php }elseif( (Yii::$app->request->get('Change') == 'Proffesional_Bodies') ){ ?>
             <!--Professional Bodies-->
 
             <div class="card" id="Employee_Proffesional_Bodies_C">
@@ -466,6 +472,7 @@ Yii::$app->session->set('isSupervisor',false);*/
             </div>
 
 
+            <?php }elseif( (Yii::$app->request->get('Change') == 'Qualifications') ){ ?>
             <!--Qualification Change-->
 
             <div class="card" id="Employee_Qualifications_Change">
@@ -524,6 +531,8 @@ Yii::$app->session->set('isSupervisor',false);*/
             </div>
 
 
+
+            <?php }elseif( (Yii::$app->request->get('Change') == 'Emergency_Contacts') ){ ?>
             <!--Emergency Contact Change-->
 
             <div class="card" id="Employee_Emergency_Contacts_C">
@@ -579,6 +588,7 @@ Yii::$app->session->set('isSupervisor',false);*/
 
 
             <!---Miscelleneous change Req-->
+             <?php }elseif( (Yii::$app->request->get('Change') == 'Asset_Assignment') ){ ?>
 
             <div class="card" id="Misc_artical_information_ch">
                 <div class="card-header">
@@ -632,6 +642,8 @@ Yii::$app->session->set('isSupervisor',false);*/
 
                 </div>
             </div>
+
+            <?php } ?>
 
     </div>
 
