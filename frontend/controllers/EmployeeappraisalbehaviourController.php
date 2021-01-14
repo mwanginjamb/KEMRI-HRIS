@@ -72,7 +72,7 @@ class EmployeeappraisalbehaviourController extends Controller
     public function actionCreate($Appraisal_No,$Employee_No){
 
         $model = new Employeeappraisalbehaviours() ;
-        $service = Yii::$app->params['ServiceName']['TrainingPlan'];
+        $service = Yii::$app->params['ServiceName']['EmployeeAppraisalBehaviours'];
 
 
         if(Yii::$app->request->post() && Yii::$app->navhelper->loadpost(Yii::$app->request->post()['Employeeappraisalbehaviours'],$model)  ){

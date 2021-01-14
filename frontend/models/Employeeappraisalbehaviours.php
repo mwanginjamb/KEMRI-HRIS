@@ -33,6 +33,8 @@ public $Peer_2_Remark;
 public $Key;
 public $isNewRecord;
 
+public $Level;
+
     public function rules()
     {
         return [

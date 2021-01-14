@@ -23,6 +23,9 @@ public $Appraiser_Rating;
 public $Agreed_Rating;
 public $Rating_Comments;
 public $Employee_Comments;
+
+public $Overall_Rating;
+public $Move_To_PIP;
 public $Key;
 public $isNewRecord;
 

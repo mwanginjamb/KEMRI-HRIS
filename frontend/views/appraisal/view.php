@@ -143,47 +143,46 @@ Yii::$app->session->set('isSupervisor',false);
                         <div class=" row col-md-12">
                             <div class="col-md-6">
 
-                                <?= $form->field($model, 'Appraisal_Start_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                <?= $form->field($model, 'MY_End_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                <?= $form->field($model, 'EY_Start_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Appraisal_No')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Employee_No')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Employee_Name')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
 
                                 <p class="parent"><span>+</span>
-                                    <?= $form->field($model, 'Employee_Name')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-
+                                    <?= $form->field($model, 'Employee_User_Id')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
                                     <?= $form->field($model, 'Level_Grade')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-
-
                                     <?= $form->field($model, 'Job_Title')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                    <?= $form->field($model, 'Function_Team')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-
-
-
-                                    <?= $form->field($model, 'Created_By')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
                                     <?= $form->field($model, 'Appraisal_Period')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                    <?= $form->field($model, 'Appraisal_Start_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                    <?= $form->field($model, 'Goal_Setting_Start_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                    <?= $form->field($model, 'MY_Start_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                    <?= $form->field($model, 'MY_End_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+
                                 </p>
 
 
                             </div>
                             <div class="col-md-6">
-
-                                <?= $form->field($model, 'MY_Appraisal_Status')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                <?= $form->field($model, 'EY_Appraisal_Status')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'EY_Start_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
                                 <?= $form->field($model, 'EY_End_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                <?= $form->field($model, 'Goal_Setting_Status')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+
 
                                 <p class="parent"><span>+</span>
 
+                                    <?= $form->field($model, 'MY_Appraisal_Status')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                    <?= $form->field($model, 'EY_Appraisal_Status')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                    <?= $form->field($model, 'Supervisor_No')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                    <?= $form->field($model, 'Supervisor_Name')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
                                     <?= $form->field($model, 'Supervisor_User_Id')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                    <?= $form->field($model, 'Employee_User_Id')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                    <?= $form->field($model, 'Supervisor_No')->hiddenInput(['readonly'=> true, 'disabled'=>true])->label(false) ?>
+                                    <?= $form->field($model, 'Overview_Manager')->hiddenInput(['readonly'=> true, 'disabled'=>true])->label(false) ?>
 
 
-                                    <?= $form->field($model, 'Peer_1_Employee_Name')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                    <?= $form->field($model, 'Peer_2_Employee_No')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                    <?= $form->field($model, 'Overview_Manager_Name')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                    <?= $form->field($model, 'Overview_Manager_UserID')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
 
 
-                                    <?= $form->field($model, 'Goal_Setting_Start_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                    <?= $form->field($model, 'Goal_Setting_End_Date')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
-                                    <?= $form->field($model, 'Goal_Setting_Status')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+                                    <?= $form->field($model, 'Recomended_Action')->textInput(['readonly'=> true, 'disabled'=>true]) ?>
+
 
 
                                 </p>
@@ -208,8 +207,12 @@ Yii::$app->session->set('isSupervisor',false);
                 <!--KRA CARD -->
                 <div class="card-info">
                     <div class="card-header">
-                        <h4 class="card-title">Employee Appraisal KRA</h4>
+                        <h4 class="card-title">Employee Appraisal Key Result Areas (KRAs)</h4>
+                        <div class="card-tools">
+                            <?= Html::a('<i class="fa fa-plus mr-2"></i> Add',['appraisalkra/create','Appraisal_No' => $_GET['Appraisal_No']],['class' => 'add btn btn-sm btn-outline-light'])?>
+                        </div>
                     </div>
+
                     <div class="card-body">
 
                         <?php if(property_exists($card->Employee_Appraisal_KRAs,'Employee_Appraisal_KRAs')){ ?>
@@ -282,7 +285,7 @@ Yii::$app->session->set('isSupervisor',false);
                                                 <td><?/*= $kpi->Appraisal_No */?></td>
                                                 <td><?/*= $kpi->Employee_No */?></td>-->
                                                             <td><?= $kpi->Objective ?></td>
-                                                            <td><?= $kpi->Due_Date ?></td>
+
                                                             <td>
                                                                 <?= ($model->Goal_Setting_Status == 'New')?Html::a('<i class="fas fa-edit"></i> ',['employeeappraisalkpi/update','Appraisal_No'=> $kpi->Appraisal_No,'Employee_No' => $kpi->Employee_No,'KRA_Line_No' => $kpi->KRA_Line_No,'Line_No' => $kpi->Line_No],['class' => 'btn btn-xs btn-primary add-objective', 'title' => 'Update Objective /KPI']):'' ?>
                                                                 <?= ($model->Goal_Setting_Status == 'New')? Html::a('<i class="fa fa-trash"></i>',['employeeappraisalkpi/delete','Key' => $kpi->Key],['class'=> 'btn btn-xs btn-danger delete-objective','title' => 'Delete Objective']):'' ?>
@@ -336,7 +339,7 @@ Yii::$app->session->set('isSupervisor',false);
                                     <td><span>+</span></td>
                                     <!--<td><?/*= $comp->Appraisal_Code */?></td>
                                 <td><?/*= $comp->Employee_Code */?></td>-->
-                                    <td><?= $comp->Category ?></td>
+                                    <td><?= isset($comp->Category)?$comp->Category:'Not Set' ?></td>
 
                                 </tr>
                                 <tr class="child">
@@ -375,7 +378,7 @@ Yii::$app->session->set('isSupervisor',false);
                                                         <!--<td><?/*= $be->Line_No */?></td>-->
                                                         <!--<td><?/*= $be->Employee_No */?></td>-->
                                                         <!-- <td><?/*= $be->Appraisal_Code */?></td>-->
-                                                        <td><?= $be->Behaviour_Name ?></td>
+                                                        <td><?= isset($be->Behaviour_Name)?$be->Behaviour_Name:'Not Set' ?></td>
                                                         <td><?= Html::checkbox('Applicable',$be->Applicable,['disabled' => true]) ?></td>
                                                         <td><?= !empty($be->Current_Proficiency_Level)?$be->Current_Proficiency_Level:'' ?></td>
                                                         <td><?= !empty($be->Expected_Proficiency_Level)?$be->Expected_Proficiency_Level:'' ?></td>
@@ -454,56 +457,7 @@ Yii::$app->session->set('isSupervisor',false);
                 </div>-->
                 <!--/Training Plan Card -->
 
-                <!--Learning Assessment Card -->
-                <div class="card-info">
-                    <div class="card-header">
-                        <h4 class="card-title">Learning Assessment </h4> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                        <?= Html::a('<i class="fas fa-plus"></i> Add New',['learningassessment/create','Appraisal_No'=> $model->Appraisal_No,'Employee_No' => $model->Employee_No],['class' => 'btn btn-xs btn-primary add-learning-assessment']) ?>
-
-                    </div>
-                    <div class="card-body">
-
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Line No.</th>
-                                <!--<th>Employee_No</th>-->
-                                <th>Appraisal_No</th>
-                                <th>Training Action</th>
-                                <th>Due_Date</th>
-                                <th>Learning_Hours</th>
-                                <th>Status_Mid_Year</th>
-                                <th>Status_End_Year</th>
-                                <th>Comments</th>
-                                <th>Action</th>
-
-
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            <?php if(property_exists($card->Learning_Assesment_Competenc,'Learning_Assesment_Competenc')){ ?>
-                                <?php foreach($card->Learning_Assesment_Competenc->Learning_Assesment_Competenc as $asses){ ?>
-                                    <tr>
-                                        <td><?= $asses->Line_No ?></td>
-                                        <!-- <td><?/*= $asses->Employee_No */?></td>-->
-                                        <td><?= $asses->Appraisal_No ?></td>
-                                        <td><?= $asses->Training_Action ?></td>
-                                        <td><?= $asses->Due_Date ?></td>
-                                        <td><?= $asses->Learning_Hours ?></td>
-                                        <td><?= !empty($asses->Status_Mid_Year)?$asses->Status_Mid_Year:'' ?></td>
-                                        <td><?= !empty($asses->Status_End_Year)?$asses->Status_End_Year:'' ?></td>
-                                        <td><?= !empty($asses->Comments)?$asses->Comments:'' ?></td>
-                                        <td><?= Html::a('<i class="fas fa-edit"></i> ',['learningassessment/update','Line_No'=> $asses->Line_No,'Appraisal_No'=> $model->Appraisal_No,'Employee_No' => $model->Employee_No],['class' => 'btn btn-xs btn-outline-primary update-learning']) ?></td>
-                                    </tr>
-                                <?php } ?>
-                            <?php }  ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!--/Learning Assessment  Card -->
 
             <?php } ?>
 
@@ -515,186 +469,14 @@ Yii::$app->session->set('isSupervisor',false);
 
                 <!----Career Development Plan-->
 
-                <div class="card-info">
-                    <div class="card-header">
-                        <h4 class="card-title">Career Development Plan</h4> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                        <?= Html::a('<i class="fas fa-plus"></i> Add New',['careerdevelopmentplan/create','Appraisal_No'=> $model->Appraisal_No,'Employee_No' =>$model->Employee_No ],
-                            [
-                                'class' => 'btn btn-xs btn-primary add-cdp',
-
-                            ]) ?>
-
-                    </div>
-                    <div class="card-body">
-
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Line No.</th>
-                                <th>Employee No</th>
-                                <th>Appraisal No</th>
-                                <th>Career Development Goal</th>
-                                <th>Estimated Start Date</th>
-                                <th>Estimate End Date</th>
-                                <th>Duration</th>
-
-                                <th>Action</th>
-
-
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            <?php if(property_exists($card->Career_Development_Plan,'Career_Development_Plan')){ ?>
-                                <?php foreach($card->Career_Development_Plan->Career_Development_Plan as $cdp){ ?>
-                                    <tr class="parent">
-                                        <td><span>+</span></td>
-                                        <td><?= $cdp->Line_No ?></td>
-                                        <td><?= $cdp->Employee_No ?></td>
-                                        <td><?= $cdp->Appraisal_No ?></td>
-                                        <td><?= $cdp->Career_Development_Goal ?></td>
-                                        <td><?= $cdp->Estimate_Start_Date ?></td>
-                                        <td><?= $cdp->Estimate_End_Date ?></td>
-                                        <td><?= $cdp->Duration ?></td>
-
-                                        <td>
-                                            <?= Html::a('<i class="fas fa-edit"></i> ',['careerdevelopmentplan/update','Line_No'=> $cdp->Line_No,'Appraisal_No'=> $model->Appraisal_No,'Employee_No' => $model->Employee_No],['class' => 'btn btn-xs btn-outline-primary update-learning']) ?>
-                                            <?= Html::a('<i class="fas fa-plus-square"></i> ',['careerdevelopmentstrength/create','Goal_Line_No'=> $cdp->Line_No,'Appraisal_No'=> $model->Appraisal_No,'Employee_No' => $model->Employee_No],['class' => 'btn btn-xs btn-outline-primary add-cds', 'title'=>'Add Career Development Strength']) ?>
-                                        </td>
-                                    </tr>
-                                    <!--Start displaying children-->
-                                    <tr class="child">
-                                        <td colspan="11" >
-                                            <table class="table table-hover table-borderless table-info">
-                                                <thead>
-                                                <tr >
-                                                    <th>Line No</th>
-                                                    <th>Appraisal No</th>
-                                                    <th>Employee No</th>
-                                                    <th>Strength</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <?php if(is_array($model->getCareerdevelopmentstrengths($cdp->Line_No))){
-
-                                                    foreach($model->getCareerdevelopmentstrengths($cdp->Line_No) as $cds):  ?>
-                                                        <tr>
-                                                            <td><?= $cds->Line_No ?></td>
-                                                            <td><?= $cds->Appraisal_No ?></td>
-                                                            <td><?= $cds->Employee_No ?></td>
-                                                            <td><?= $cds->Strength ?></td>
-                                                            <td>
-                                                                <?= Html::a('<i class="fas fa-edit"></i> ',['careerdevelopmentstrength/update','Line_No'=> $cds->Line_No,'Appraisal_No'=> $model->Appraisal_No,'Employee_No' => $model->Employee_No],['class' => 'btn btn-xs btn-outline-primary update-learning','title' => 'Update Strength']) ?>
-                                                                <?= Html::a('<i class="fas fa-trash"></i> ',['careerdevelopmentstrength/delete','Key'=> $cds->Key],['class' => 'btn btn-xs btn-outline-primary delete', 'title'=>'Delete Career Development Strength']) ?>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    endforeach;
-                                                }
-                                                ?>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <!--end displaying children-->
-
-
-
-
-
-                                <?php } ?>
-                            <?php }  ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
 
                 <!--/Career Development Plan-->
 
                 <!---Areas_of_Further_Development-->
 
 
-                <div class="card-info">
-                    <div class="card-header">
-                        <h4 class="card-title">Areas of Further Development</h4> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                        <?= Html::a('<i class="fas fa-plus"></i> Add New',['furtherdevelopmentarea/create','Appraisal_No'=> $model->Appraisal_No,'Employee_No' => $model->Employee_No],['class' => 'btn btn-xs btn-primary add-fda']) ?>
-
-                    </div>
-                    <div class="card-body">
-
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Line No.</th>
-                                <th>Employee No</th>
-                                <th>Appraisal No</th>
-                                <th>Weakness</th>
-                                <th>Action</th>
-
-
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            <?php if(property_exists($card->Areas_of_Further_Development,'Areas_of_Further_Development')){ ?>
-                                <?php foreach($card->Areas_of_Further_Development->Areas_of_Further_Development as $fda){ ?>
-                                    <tr class="parent">
-                                        <td><span>+</span></td>
-                                        <td><?= $fda->Line_No ?></td>
-                                        <td><?= $fda->Employee_No ?></td>
-                                        <td><?= $fda->Appraisal_No ?></td>
-                                        <td><?= $fda->Weakness ?></td>
-
-                                        <td>
-                                            <?= Html::a('<i class="fas fa-edit"></i> ',['furtherdevelopmentarea/update','Line_No'=> $fda->Line_No,'Appraisal_No'=> $model->Appraisal_No,'Employee_No' => $model->Employee_No],['class' => 'btn btn-xs btn-outline-primary update-learning']) ?>
-                                            <?= Html::a('<i class="fas fa-plus-square"></i> ',['weeknessdevelopmentplan/create','Wekaness_Line_No'=> $fda->Line_No,'Appraisal_No'=> $model->Appraisal_No,'Employee_No' => $model->Employee_No],['class' => 'btn btn-xs btn-outline-primary add-wdp','Add a Weakness Development Plan.']) ?>
-                                        </td>
-                                    </tr>
-                                    <!--Start displaying children-->
-                                    <tr class="child">
-                                        <td colspan="11" >
-                                            <table class="table table-hover table-borderless table-info">
-                                                <thead>
-                                                <tr >
-                                                    <th>Line No</th>
-                                                    <th>Appraisal No</th>
-                                                    <th>Employee No</th>
-                                                    <th>Development Plan</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <?php if(is_array($model->getWeaknessdevelopmentplan($fda->Line_No))){
-
-                                                    foreach($model->getWeaknessdevelopmentplan($fda->Line_No) as $wdp):  ?>
-                                                        <tr>
-                                                            <td><?= $wdp->Line_No ?></td>
-                                                            <td><?= $wdp->Appraisal_No ?></td>
-                                                            <td><?= $wdp->Employee_No ?></td>
-                                                            <td><?= $wdp->Development_Plan ?></td>
-                                                            <td>
-                                                                <?= Html::a('<i class="fas fa-edit"></i> ',['weeknessdevelopmentplan/update','Line_No'=> $wdp->Line_No,'Appraisal_No'=> $model->Appraisal_No,'Employee_No' => $model->Employee_No],['class' => 'btn btn-xs btn-outline-primary update-learning','title'=> 'Update Weakness Development Plan']) ?>
-                                                                <?= Html::a('<i class="fas fa-trash"></i> ',['weeknessdevelopmentplan/delete','Key'=> $wdp->Key],['class' => 'btn btn-xs btn-outline-primary delete', 'title'=>'Delete Weakness Development Plan']) ?>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    endforeach;
-                                                }
-                                                ?>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <!--end displaying children-->
-                                <?php } ?>
-                            <?php }  ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
 
                 <!--/-Areas_of_Further_Development-->
 
@@ -768,7 +550,7 @@ $script = <<<JS
         
       //Add a training plan
     
-     $('.add-trainingplan').on('click',function(e){
+     $('.add-trainingplan, .add').on('click',function(e){
         e.preventDefault();
         var url = $(this).attr('href');
         console.log('clicking...');

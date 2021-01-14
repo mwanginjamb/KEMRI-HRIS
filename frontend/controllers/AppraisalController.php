@@ -36,7 +36,7 @@ class AppraisalController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index','vacancies'],
+                'only' => ['index','vacancies','view','create','update','delete'],
                 'rules' => [
                     [
                         'actions' => ['vacancies'],
@@ -44,7 +44,7 @@ class AppraisalController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['index','vacancies'],
+                        'actions' => ['index','vacancies','view','create','update','delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -187,7 +187,7 @@ class AppraisalController extends Controller
 
         $service = Yii::$app->params['ServiceName']['AppraisalList'];
         $filter = [
-            'Employee_No' => Yii::$app->user->identity->{'Employee_No'},
+            'Employee_No' => Yii::$app->user->identity->{'Employee No_'},
         ];
         $appraisals = \Yii::$app->navhelper->getData($service,$filter);
         //ksort($appraisals);
@@ -790,7 +790,7 @@ class AppraisalController extends Controller
         ];
 
         $appraisal = Yii::$app->navhelper->getData($service, $filter);
-
+        // Yii::$app->recruitment->printrr($appraisal);
         if(is_array($appraisal)){
             $model = Yii::$app->navhelper->loadmodel($appraisal[0],$model);
         }

@@ -29,7 +29,9 @@ use yii\widgets\ActiveForm;
                                 <tbody>
 
                                    
-                                    <?= $form->field($model, 'KRA')->textInput(['readonly' => true]) ?>
+                                    <?= $form->field($model, 'KRA')->textInput(['maxlength' => 250, 'required' => true]) ?>
+                                    <?= ($model->isNewRecord)?$form->field($model, 'Employee_No')->hiddenInput(['value' => Yii::$app->user->identity->{'Employee No_'}]):'' ?>
+                                    <?= ($model->isNewRecord)?$form->field($model, 'Appraisal_No')->hiddenInput():'' ?>
 
                                     <?= (Yii::$app->session->get('MY_Appraisal_Status') == 'Appraisee_Level' && Yii::$app->session->get('isSupervisor') == false )?$form->field($model, 'Perfomance_Level')->dropDownList($performancelevels,['prompt'=> 'Select Performance Level']):'' ?>
 

@@ -70,21 +70,22 @@ class AppraisalkraController extends Controller
     public function actionCreate(){
 
         $model = new Employeeappraisalkra() ;
+        $model->isNewRecord = true;
+        $model->Appraisal_No = Yii::$app->request->get('Appraisal_No');
         $service = Yii::$app->params['ServiceName']['EmployeeAppraisalKRA'];
 
-        if(Yii::$app->navhelper->loadpost(Yii::$app->request->post()['Employeeappraisalkra'],$model) && Yii::$app->request->post()){
+        if(Yii::$app->request->post() && Yii::$app->navhelper->loadpost(Yii::$app->request->post()['Employeeappraisalkra'],$model)){
 
 
             $result = Yii::$app->navhelper->postData($service,$model);
 
-            if(is_object($result)){
-                Yii::$app->session->setFlash('success','Key Result Area Evaluated Successfully',true);
-                return $this->redirect(['appraisal/view']);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if(!is_string($result)){
 
+                return ['note' => '<div class="alert alert-success">Key Result Area Saved Successfully </div>' ];
             }else{
-                Yii::$app->session->setFlash('error','Error Evaluating Key Result Area: '.$result,true);
-                return $this->redirect(['index']);
 
+                return ['note' => '<div class="alert alert-danger">Error Saving Key Result Area : '.$result.'</div>'];
             }
 
         }//End Saving experience

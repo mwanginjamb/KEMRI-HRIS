@@ -44,7 +44,7 @@ use yii\widgets\ActiveForm;
 
                                     <?= $form->field($model, 'Objective')->textarea(['max-length' => 250, 'row' => 4,'placeholder' => 'Your KRA Objective / KPI']) ?>
 
-                                    <?= $form->field($model, 'Due_Date')->textInput(['type' => 'date']) ?>
+
 
                                     <?= $form->field($model, 'Key')->hiddenInput(['readonly'=> true])->label(false) ?>
 

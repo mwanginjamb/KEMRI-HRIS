@@ -308,7 +308,7 @@ class RecruitmentController extends Controller
         $requisitions = \Yii::$app->navhelper->getData($service,$filter);
         $result = [];
         foreach($requisitions as $req){
-            if(($req->No_Posts >= 0 && !empty($req->Job_Description) && !empty($req->Job_Id)) && ($req->Requisition_Type == 'Internal' || $req->Requisition_Type == 'Both')  ) {
+            if(( !empty($req->No_Posts) && $req->No_Posts >= 0 && !empty($req->Job_Description) && !empty($req->Job_Id)) && ($req->Requisition_Type == 'Internal' || $req->Requisition_Type == 'Both')  ) {
                 $Viewlink = Html::a('Apply', ['view', 'Job_ID' => $req->Job_Id], [
                     'class' => 'btn btn-outline-primary btn-xs',
                     'data' => [
